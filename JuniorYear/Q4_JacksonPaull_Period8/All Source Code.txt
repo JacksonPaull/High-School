@@ -1,0 +1,962 @@
+﻿**ALL OF THIS CODE IS COPIED AND PASTED SO SOME THINGS WILL SEEM OUT OF PLACE OR HARD TO READ, HOWEVER ALL OF THIS CODE WORKS IN MY PROJECT AND IF YOU NEED TO SEE THE CODE IN THE IDE PLEASE EMAIL ME AND I WILL SHOW YOU**
+
+
+
+
+//player variables
+#macro PLAYER_SPEED 10
+
+
+//ball variables
+#macro DIR_LEFT 0
+#macro DIR_RIGHT 1
+#macro BALL_SPEED 10
+
+
+//tileset
+#macro TILE_WALL 1
+#macro TILE_GOAL 2
+
+
+var playerNum = argument0;
+
+
+if(playerNum == 0)
+{
+        if(keyboard_check(ord("W")))
+        {
+                y-=PLAYER_SPEED;
+        }
+        if (keyboard_check(ord("S")))
+        {
+                y+=PLAYER_SPEED
+        }
+}
+else if(playerNum == 1)
+{
+        if(keyboard_check(vk_up))
+        {
+                y-=PLAYER_SPEED;
+        }
+        if (keyboard_check(vk_down))
+        {
+                y+=PLAYER_SPEED
+        }
+}
+
+
+
+
+//prevent players from moving out of bounds
+if( y<=32)
+        y=32;
+if(y+128>=740)
+        y=612;
+
+
+//moving right
+if(movingDirection = DIR_RIGHT)
+{
+        var t2 = tilemap_get_at_pixel(map,x+5,y) & tile_index_mask;
+
+
+        if(tile_get_index(t2) == TILE_WALL)
+        {
+                movingDirection=DIR_LEFT;
+        }
+        if(tile_get_index(t2) == TILE_GOAL)
+        {
+                with(obj_score)
+                {
+                        scoreIncrease(lastHitBy);
+                        resetGame();
+                        waiting = true;
+                }
+                instance_create_layer(512,384,layer_get_id("layer_instances"),ball_spawn);
+                instance_destroy();
+                
+                
+        }
+}
+
+
+//moving left
+else if(movingDirection = DIR_LEFT)
+{
+        var t2 = tilemap_get_at_pixel(map,x-5,y) & tile_index_mask;        
+
+
+        if(tile_get_index(t2) == TILE_WALL)
+        {
+                movingDirection=DIR_RIGHT;
+        }
+        if(tile_get_index(t2) == TILE_GOAL)
+        {
+                with(obj_score)
+                {
+                        scoreIncrease(lastHitBy);
+                        resetGame();
+                        waiting = true;
+                }
+                instance_destroy();
+                instance_create_layer(512,384,layer_get_id("layer_instances"),ball_spawn);                
+                
+        }
+        
+}
+
+
+//moving up
+if(dy<=0)
+{
+        var t1 = tilemap_get_at_pixel(map,x,y-5) & tile_index_mask;
+        
+        if(tile_get_index(t1) == TILE_WALL)
+        {
+                dy*=-1;        
+        }
+
+
+}
+
+
+//moving down
+else if(dy>=0)
+{        
+        var t1 = tilemap_get_at_pixel(map,x,y+5) & tile_index_mask;
+                
+        if(tile_get_index(t1) == TILE_WALL)
+        {
+                dy*=-1;        
+        }
+
+
+        return;
+}
+
+
+switch(argument0)
+{
+        case 0: playerOneScore++; break;
+        case 1: playerTwoScore+=1; break;
+        case -1: break;
+}
+
+
+//obj_player.y = 320;
+
+
+counter++;
+//waited 0 seconds
+if(counter<30)
+        shouldDisplay = 3;
+
+
+
+
+//waited 1 second
+else if(counter<60)
+        shouldDisplay = 2;
+
+
+//waited 2 seconds
+else if(counter<90)
+        shouldDisplay = 1;
+
+
+//waited 3 seconds
+else
+{
+        instance_create_layer(512,384,layer_get_id("layer_instances"),obj_ball)
+        with(obj_score)
+        {
+                lastHitBy = -1;        
+        }
+        counter = 0;
+        waiting = false;
+        with(ball_spawn)
+        instance_destroy();
+}
+
+
+draw_set_font(fnt);
+draw_text(room_width/2-200,150,"PLAYER 1:" + string(playerOneScore));
+draw_text(room_width/2+100,150,"PLAYER 2:" + string(playerTwoScore));
+
+
+var number = argument0;
+
+
+draw_set_font(fnt);
+draw_text(room_width/2,room_height/2-100,string(number));
+
+
+draw_set_font(fnt);
+var map = layer_tilemap_get_id(layer_get_id("layer_collisions"))
+for(var i =0;i<room_height;i++)
+{
+        var t1 = tile_get_index(tilemap_get_at_pixel(map,mouse_x,mouse_y+i));
+        
+        if(t1 == TILE_WALL)
+        {
+                for(var c =mouse_y;c>0;c--)
+                {
+                        var t2 = tile_get_index(tilemap_get_at_pixel(map,mouse_x,c));
+        
+                        if(t2 == TILE_WALL)
+                        {
+                                break;
+                        }
+                }
+                break;
+        }
+}
+
+
+
+
+draw_text(200,200,"Mouse is "+string(i)+" pixels above a wall\nMouse is "+string(mouse_y-c)+" pixels below a wall");
+
+
+processPlayerMovement(playerNum);
+
+
+game_restart();
+
+
+game_end();
+
+
+randomise();
+movingDirection = round(random(1));
+dy = floor(random_range(-5,6));
+map = layer_tilemap_get_id(layer_get_id("layer_collisions"));
+
+
+
+
+if(movingDirection = DIR_LEFT)
+        x-=BALL_SPEED;
+else if(movingDirection = DIR_RIGHT)
+        x+=BALL_SPEED;
+        
+
+
+
+
+y+=dy;
+processBallCollisions();
+
+
+switch(movingDirection)
+{
+        case DIR_LEFT: movingDirection = DIR_RIGHT;        break;
+        case DIR_RIGHT: movingDirection = DIR_LEFT;        break;
+}
+with(other)
+{
+        if(playerNum == 0)
+        {
+                with(obj_score)
+                {
+                        lastHitBy = 0;        
+                }
+        }
+        else if(playerNum == 1)
+        {
+                with(obj_score)
+                {
+                        lastHitBy = 1;        
+                }
+        }
+}
+dy = floor(random_range(-5,6));
+
+
+
+
+playerOneScore = 0;
+playerTwoScore = 0;
+lastHitBy = -1;
+counter = 0;
+waiting = false;
+shouldDisplay = -1;
+
+
+
+
+show_debug_message("Player 1: "+string(playerOneScore)+"\nPlayer 2: "+string(playerTwoScore));
+if(waiting)
+        resetGame();
+
+
+
+
+
+
+displayScore();
+if(shouldDisplay!=-1)
+{
+        displayCountdown(shouldDisplay);
+        shouldDisplay = -1;
+}
+
+
+//DEBUG_mouseIsPixelsAbove();
+
+
+buttonOn = 0;
+buttonNames = ["Game Start","Quit"];
+released = true;
+
+
+
+
+draw_self();
+draw_set_font(fnt);
+
+
+for(var i =0;i<array_length_1d(buttonNames);i++)
+{
+        draw_text(room_width/2-50,300+(i*25),buttonNames[i]);
+        if(buttonOn = i)
+        {
+                draw_text(room_width/2-75,300+(i*25),"->");        
+        }
+}
+
+
+if(keyboard_check_pressed(vk_up))
+{
+        buttonOn--;        
+}
+if(keyboard_check_pressed(vk_down))
+{
+        buttonOn++;        
+}
+
+
+if(buttonOn<0)
+        buttonOn = array_length_1d(buttonNames)-1;
+
+
+if(buttonOn>(array_length_1d(buttonNames)-1))
+        buttonOn = 0;
+        
+
+
+
+
+if(keyboard_check_pressed(vk_enter)&&released)
+{
+        switch(buttonOn)
+        {
+                case 0: room_goto_next(); break;
+                case 1: game_end();
+        }
+        released = false;
+}
+if(keyboard_check_released(vk_enter))
+{
+        released = true;        
+}
+
+
+
+
+layer_set_visible("layer_collisions", false)
+with(obj_score)
+{
+        resetGame();
+        waiting = true;
+}
+instance_create_layer(512,384,layer_get_id("layer_instances"),ball_spawn);
+
+
+playerNum = 0;
+
+
+playerNum = 1;
+
+
+
+
+
+
+//tile indexes
+#macro TILE_SAND 1
+#macro TILE_BRICK 2
+#macro TILE_WATER 3
+
+
+
+
+//grid size for pathfinding
+#macro GRID_SIZE 8
+
+
+
+
+//player directions
+#macro DIR_STOP 0
+#macro DIR_UP 1
+#macro DIR_DOWN 2
+#macro DIR_LEFT 3
+#macro DIR_RIGHT 4
+
+
+//player combo enum
+enum playerstate {idle, attack1,attack2,attackFireball}
+
+
+/// @description animation_end(sprite_index,image_index, rate)
+/// @param {real} <sprite_index> The index of the sprite being animated
+/// @param {real} <image_index> The current frame value
+/// @param {real} <rate> -See Below-
+///     The rate of change in frames per step if not
+///     using built in image_index/image_speed.  
+///     Don't use if you don't think you need this.  You probably don't.
+ 
+//returns true if the animation will loop this step.
+ 
+//Script courtesy of PixellatedPope & Minty Python from the GameMaker subreddit discord
+//https://www.reddit.com/r/gamemaker/wiki/discord
+ 
+var _sprite=sprite_index;
+var _image=image_index;
+if(argument_count > 0)   _sprite=argument[0];
+if(argument_count > 1)  _image=argument[1];
+var _type=sprite_get_speed_type(sprite_index);
+var _spd=sprite_get_speed(sprite_index)*image_speed;
+if(_type == spritespeed_framespersecond)
+    _spd = _spd/room_speed;
+if(argument_count > 2) _spd=argument[2];
+return _image+_spd >= sprite_get_number(_sprite);
+
+
+switch(nextState)
+{        
+        case "attack2":
+                state = playerstate.attack2;
+                firstTime = true;
+                break;
+                
+        case "idle":
+                image_index = sBlue_Standing;
+                image_speed = 1;
+                firstTime = true;
+                globalCooldown(10);
+                state = playerstate.idle; 
+                mask_index = sBlue_Standing;
+        break;
+        
+}
+
+
+
+
+var time = argument0;
+gcd = true;
+alarm[1] = time;
+
+
+//Animation and movement
+path = pth_skeleton1;
+movespeed = 1.5;
+dir=DIR_LEFT;
+xp = x;
+
+
+
+
+//For restarting after de-aggro
+startX = x;
+startY = y;
+restarted= true;
+
+
+//Tiles the skeleton can't collide with
+collisionTiles = [TILE_WATER,TILE_BRICK];
+
+
+//aggro ranges
+aggroIn = 70;
+aggroOut = 120;
+aggroindex = false;
+
+
+//For initalizing all variables that need to be init after the object is drawn once
+init = false;
+
+
+if(!init){
+        generatePathMap();
+        startpath=path;        
+        path_start(startpath,movespeed,path_action_restart,true);
+        init = true;
+}
+
+
+//Update the direction facing
+updateMobDirection();
+
+
+//Aggro onto the player within 70
+aggroInRange(aggroIn,aggroOut);
+
+
+//Draw All Debugging things
+DEBUG_drawAggroRange(aggroIn,aggroOut)
+DEBUG_drawPath(path);
+//DEBUG_drawPathMap();
+
+
+
+
+//draw the skeleton
+draw_set_alpha(1);
+draw_self();
+
+
+//movespeed and animation
+movespeed = 2;
+dir=DIR_DOWN;
+xp = x;
+
+
+
+
+//tiles the bat can't collide with
+collisionTiles = [TILE_BRICK];
+
+
+//aggro variables
+aggroIn=70;
+aggroOut=120;
+aggroindex = false;
+startX = x;
+startY = y;
+restarted= true;
+
+
+//For any variables that need to be made for each object individually
+init = false;
+
+
+if(!init)
+{
+        generatePathMap();        
+        startpath = path
+        init = true;
+        hp =5;
+}
+
+
+updateMobDirection();
+
+
+if(hp<=0)
+{
+        instance_destroy();
+}
+
+
+//aggroInRange(aggroIn,aggroOut);
+
+
+
+
+DEBUG_drawAggroRange(aggroIn,aggroOut);
+DEBUG_drawPath(path);
+
+
+draw_set_alpha(1);
+draw_self();
+//DEBUG_drawPathMap();
+
+
+/// @description Insert description here
+// You can write your code in this editor
+hp = 10;
+
+
+
+
+/// @description Insert description here
+// You can write your code in this editor
+if(hp<=0)
+{
+        instance_destroy();        
+}
+
+
+
+
+/*
+INITIALIZE ALL VARIABLES FOR THE PLAYER
+*/
+
+
+//Attack Variables
+state = playerstate.idle;
+endAnimation = false;
+hitByAttack = ds_list_create();
+firstTime = true;
+nextState = "idle";
+alarm[1] = 0; //GLOBAL COOLDOWN
+gcd = false;
+//Animation
+animationSpeed=0.5;
+dir=DIR_STOP;
+image_index=0;
+
+
+//Movement
+playerspeed=5;
+
+
+//collisions
+var l = layer_get_id("collisions");
+tilemap= layer_tilemap_get_id(l);
+
+
+//sprite info
+sprite_bbox_left = sprite_get_bbox_left(sprite_index) - sprite_get_xoffset(sprite_index);
+sprite_bbox_right = sprite_get_bbox_right(sprite_index) - sprite_get_xoffset(sprite_index);
+sprite_bbox_top = sprite_get_bbox_top(sprite_index) - sprite_get_yoffset(sprite_index);
+sprite_bbox_bottom = sprite_get_bbox_bottom(sprite_index) - sprite_get_yoffset(sprite_index);
+
+
+// You can write your code in this editor
+ds_list_destroy(hitByAttack);
+
+
+
+
+// You can write your code in this editor
+gcd = false;
+
+
+
+
+// You can write your code in this editor
+room_restart();
+
+
+draw_set_alpha(1);
+draw_self();
+
+
+/*
+PROCESS ALL PLAYER INPUT
+*/
+
+
+//If the player's moves are on cooldown then they are forced into an idle state
+if(gcd = true)
+        state = playerstate.idle
+
+
+switch(state)
+{
+        case playerstate.idle: playerstate_idle_scripts(); break;        
+        case playerstate.attack1: playerstate_attack1(); break;
+        case playerstate.attack2: playerstate_attack2(); break;
+        case playerstate.attackFireball: playerstate_attackFireball(); break;
+}
+
+
+//Process collisions with specific tiles
+processPlayerCollisions();
+
+
+
+
+/// @description Insert description here
+// You can write your code in this editor
+direction = point_direction(x,y,mouse_x,mouse_y);
+speed = 10;
+
+
+/// @description Insert description here
+// You can write your code in this editor
+with (other){
+        hp-=5;
+}
+instance_destroy();
+
+
+
+
+//Processes collision for the player object, as no other objects should need collision checks
+
+
+
+
+if(dir=DIR_DOWN){ //collide with all things down        
+        var t1 = tilemap_get_at_pixel(tilemap,bbox_left,bbox_bottom) & tile_index_mask;
+        var t2 = tilemap_get_at_pixel(tilemap,bbox_right,bbox_bottom) & tile_index_mask;
+        
+        //if there is a collision tile at all - CHANGE THIS FOR SPECIALIZED COLLISIONS LATER
+        if((tile_get_index(t1)==TILE_BRICK) || (tile_get_index(t2)==TILE_BRICK)||(tile_get_index(t1)==TILE_WATER) || (tile_get_index(t2)==TILE_WATER))
+        {                
+                y=((bbox_bottom & ~63)-1) - sprite_bbox_bottom;                
+        }
+        
+}
+else if(dir=DIR_UP){//collide with all things up
+        var t1 = tilemap_get_at_pixel(tilemap,bbox_left,bbox_top) & tile_index_mask;
+        var t2 = tilemap_get_at_pixel(tilemap,bbox_right,bbox_top) & tile_index_mask;
+        
+        if((tile_get_index(t1)==TILE_BRICK) || (tile_get_index(t2)==TILE_BRICK)||(tile_get_index(t1)==TILE_WATER) || (tile_get_index(t2)==TILE_WATER))
+        {
+                y=((bbox_top+64)& ~63) - sprite_bbox_top+1;
+        }
+        
+}
+else if (dir=DIR_LEFT){
+        var t1 = tilemap_get_at_pixel(tilemap,bbox_left,bbox_top) & tile_index_mask;
+        var t2 = tilemap_get_at_pixel(tilemap,bbox_left,bbox_bottom) & tile_index_mask;
+        
+        if((tile_get_index(t1)==TILE_BRICK) || (tile_get_index(t2)==TILE_BRICK)||
+        (tile_get_index(t1)==TILE_WATER) || (tile_get_index(t2)==TILE_WATER))
+        {
+                x=((bbox_left+64)& ~63)- sprite_bbox_left;
+        }
+
+
+}
+else if(dir=DIR_RIGHT){
+        var t1 = tilemap_get_at_pixel(tilemap,bbox_right,bbox_top) & tile_index_mask;
+        var t2 = tilemap_get_at_pixel(tilemap,bbox_right,bbox_bottom) & tile_index_mask;
+        
+        if((tile_get_index(t1)==TILE_BRICK) || (tile_get_index(t2)==TILE_BRICK)||(tile_get_index(t1)==TILE_WATER) || (tile_get_index(t2)==TILE_WATER))
+        {
+                x=((bbox_right& ~63)-1) - sprite_bbox_right;
+        }
+}
+
+
+//Check WASD and Arrow keys, then set movement accordingly
+//and adjust animation accordingly
+image_xscale=1;
+if(keyboard_check(ord("W")) || keyboard_check(vk_up))
+{
+        y-=playerspeed;
+        dir=DIR_UP;
+        sprite_index=sBlue_Up;
+}
+else if(keyboard_check(ord("A")) || keyboard_check(vk_left))
+{
+        x-=playerspeed;
+        dir=DIR_LEFT;
+        sprite_index=sBlue_Left;
+}
+else 
+if(keyboard_check(ord("S")) || keyboard_check(vk_down))
+{
+        
+        y+=playerspeed;
+        dir=DIR_DOWN;
+        sprite_index=sBlue_Down;
+}
+else 
+if(keyboard_check(ord("D")) || keyboard_check(vk_right))
+{
+        
+        x+=playerspeed;
+        dir=DIR_RIGHT;
+        sprite_index=sBlue_Right;
+}
+else{
+        if(dir=DIR_LEFT)
+        {
+                image_xscale=-1;
+                sprite_index=sBlue_Standing;
+        }
+        else if(dir=DIR_RIGHT)
+        {
+                sprite_index=sBlue_Standing;
+        }
+        else if(dir=DIR_UP)
+        {
+                sprite_index=sBlue_Up;
+                image_index=0;
+                image_speed=0;
+        }
+        else if(dir=DIR_DOWN)
+        {
+                sprite_index=sBlue_Down;
+                image_index=0;
+                image_speed=0;
+        }        
+}
+
+
+image_speed=animationSpeed;
+
+
+
+
+processPlayerMovement();
+
+
+
+
+if(!gcd){
+        if (keyboard_check(ord("F")))
+        {
+                state = playerstate.attack1;
+        }
+        if (keyboard_check(ord("G")))
+        {
+                state = playerstate.attackFireball;
+        }
+}
+
+
+/*
+Intended usage- Call changePlayerMask("idle/attack",attack number if applicable)
+
+
+switch the direction to choose the correct mask for the correct attack
+*/
+
+
+
+
+instance_create_layer(x,y,layer,obj_playerFireball);
+globalCooldown(60);
+nextState = "idle";
+state = playerstate.idle;
+
+
+
+
+//start of the attack
+
+
+/* MODIFY SPRITE
+
+
+if(sprite_index!=attacksprite){
+sprite_index=attacksprite;
+image_index = 0;
+ds_list_clear(hitByAttack);
+}
+*/
+
+
+
+
+//Use Attack hitbok to check for hits
+/*
+Make a hitbox sprite, make its mask precise per frame
+mask_index = attack_hitbox_sprite
+*/
+if(firstTime)
+{
+        sprite_index = Baddie_Walk_Right;
+        image_index = 0;
+        image_speed = 0.5;
+        firstTime = false;
+        nextState = "idle";
+        lag = true;
+        mask_index = Baddie_Walk_Right
+}
+
+
+
+
+var hitByAttackNow = ds_list_create();
+var hits = instance_place_list(x,y,obj_enemy,hitByAttackNow,false);
+if hits>0
+{
+        for(var i = 0; i<hits;i++)
+        {
+                //if this instance has not been hit yet
+                var hitID = hitByAttackNow[| i]; //shorthand for ds_list_find_value(hitByAttackNow,i)
+                if(ds_list_find_index(hitByAttack,hitID) == -1)
+                {
+                        ds_list_add(hitByAttack,hitID);
+                        with(hitID)
+                        {
+                                //whatever I want to do with the enemy
+                                //deal damage, make them flinch, change their sprite etc
+                                hp-=10;
+                        }
+                }
+        }
+}
+
+
+ds_list_destroy(hitByAttackNow);
+
+
+if(keyboard_check_released(ord("F")))
+{
+        lag = false;
+}
+
+
+if(!lag)
+{        
+        if(keyboard_check(ord("F")))
+        {
+                nextState = "attack2";
+        }
+}
+
+
+if(animation_end())
+{
+        switchStates();
+}
+
+
+
+
+
+
+if(firstTime)
+{
+        sprite_index = Baddie_Walk_Left;
+        image_index = 0;
+        image_speed = 0.5;
+        firstTime = false;
+        nextState = "idle";
+        mask_index = Baddie_Walk_Left;
+}
+
+
+
+
+var hitByAttackNow = ds_list_create();
+var hits = instance_place_list(x,y,obj_enemy,hitByAttackNow,false);
+if hits>0
+{
+        for(var i = 0; i<hits;i++)
+        {
+                //if this instance has not been hit yet
+                var hitID = hitByAttackNow[| i]; //shorthand for ds_list_find_value(hitByAttackNow,i)
+                if(ds_list_find_index(hitByAttack,hitID) == -1)
+                {
+                        ds_list_add(hitByAttack,hitID);
+                        with(hitID)
+                        {
+                                //whatever I want to do with the enemy
+                                //deal damage, make them flinch, change their sprite etc
+                                hp-=10;
+                        }
+                }
+        }
+}
+
+
+ds_list_destroy(hitByAttackNow);
+
+
+if(animation_end())
+{
+        switchStates();
+}

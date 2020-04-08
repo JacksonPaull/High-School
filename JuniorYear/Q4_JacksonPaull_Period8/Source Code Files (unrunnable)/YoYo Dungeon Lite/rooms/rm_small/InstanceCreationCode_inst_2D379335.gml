@@ -1,0 +1,1 @@
+path=pth_skeleton3;

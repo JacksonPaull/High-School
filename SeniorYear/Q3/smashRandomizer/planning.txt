@@ -1,0 +1,55 @@
+Over-Arcing Goals
+    1. Randomize character selection based on restrictions and weighting
+    2. Online persona and local persona
+    3*. Stats done with manual collection after a game?
+    4. Gui for restricting and randomizing
+    5. Web-scraped data (therefore I can uppdate tier and stuff automatically after patches)
+
+Specific functions - General
+    1. Restrict data based on user input
+    2. Show the datatable
+        a. Display by Order added to smash (default)
+        b. Alphabetical
+        c. Series/world
+        d. Other variables that can be used to restrict
+    3. Randomize character based on personal preferences
+
+Specific functions - Offline
+    1. Randomize Stage
+    2. Randomize character for 1-8 players
+
+Data to restrict by
+    1. Name (Blacklist)
+    2. Weight Class
+        a. Heavy
+        b. Mid-weight
+        c. Light
+    3. Fighter type
+        a. Mage
+        b. Swordy
+        c. Melee
+        d. Hybrid
+    4. Speed
+        a. High
+        b. Low
+        c. Medium
+    5. Counters
+    6. Countered by
+    7. Tier
+    
+Notes:
+    Switch for pokemon trainer as 1 or 3 characters
+    Echo fighters as unique or same characters
+        Futher dropdown to select which echo fighters are unique (Chrom & Roy vs Peach & Daisy)
+
+
+
+
+
+
+
+
+
+JSON STRUCTURE
+    things to add:
+        filepath for each user and their associated enjoyment level files etc

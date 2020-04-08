@@ -1,0 +1,10 @@
+Pathfinding in python - djistrika and A*
+password manager in python, and hashing for encyption
+Tetris in js?
+python discord bot?
+
+chess and/or chess ai?
+
+AI in Javascript using neat?????
+	-Snake
+	-Dino Game

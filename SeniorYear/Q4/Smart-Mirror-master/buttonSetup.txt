@@ -1,0 +1,3 @@
+Instructions for putting in button:
+    -place button over trough on breadboard
+    -on the GPIO on the pi, connect the button to ground and PGIO 18 (doesnt matter which pins as long as on same side of tough)
