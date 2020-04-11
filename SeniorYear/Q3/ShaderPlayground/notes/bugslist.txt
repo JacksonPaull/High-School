@@ -1,5 +1,0 @@
-Need to make UI based on camera width and all proportioned to the right side
-
-
-
-

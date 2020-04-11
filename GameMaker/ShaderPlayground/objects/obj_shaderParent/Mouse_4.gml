@@ -1,0 +1,1 @@
+global.activeShader = self

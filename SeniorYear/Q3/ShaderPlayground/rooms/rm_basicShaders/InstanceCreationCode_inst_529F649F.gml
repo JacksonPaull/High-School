@@ -1,1 +1,0 @@
-movedir = "forward"

@@ -1,1 +1,0 @@
-path=pth_bat1;

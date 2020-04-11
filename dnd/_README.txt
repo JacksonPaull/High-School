@@ -1,3 +1,0 @@
-This folder contains a small app I created to allow a friend of mine to run dungeon and dragons meetings more effeciently. He found trouble with keeping track of a lot of easily automatable tasks, as the room grew loud with the night, so I spent a day creating a small console app to automate those tasks. The app can be controlled after entering the secret password 'xd'. This password is by no means secure but was more of a joke than any attempt at securing this console. Other than that every command is relatively self explanatory and the console should account for all edge cases.
-
-Use the 'help' command to list all of the commands I included

@@ -1,1 +1,0 @@
-global.debug ^= keyboard_check_pressed(vk_f12) //XOR equals. If debug is true and press is trye, debug is false etc

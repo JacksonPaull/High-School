@@ -1,0 +1,1 @@
+y = ystart+20*sin(current_time/room_speed/pi)
