@@ -1,0 +1,3714 @@
+<app>
+	<elements>
+		<!-- Pregame stuff -->
+		<field>
+            <!-- intChoice -->
+            <name>preloadNumber</name>
+            <label>Preloaded Power Cells</label>
+            <type>int</type>
+            <!--
+            The int <type> which returns an single int value to the database 
+            -->
+            <default>0</default>
+            <min>0</min>
+            <max>3</max>
+        </field>
+		<field>
+            <!-- intChoice -->
+            <name>feedNum</name>
+            <label>Dropped Power Cells</label>
+            <type>int</type>
+            <!--
+            The int <type> which returns an single int value to the database 
+            -->
+            <default>0</default>
+            <min>0</min>
+            <max>10</max>
+        </field>
+		<field>
+            <!-- intChoice -->
+            <name>autoPickup</name>
+            <label>Power Cells Intaken</label>
+            <type>int</type>
+            <!--
+            The int <type> which returns an single int value to the database 
+            -->
+            <default>0</default>
+            <min>0</min>
+            <max>10</max>
+        </field>
+        <field>
+            <!-- intChoice -->
+            <name>autoLower</name>
+            <label>Scored Lower</label>
+            <type>int</type>
+            <!--
+            The int <type> which returns an single int value to the database 
+            -->
+            <default>0</default>
+            <min>0</min>
+            <max>15</max>
+        </field>
+        <field>
+            <!-- intChoice -->
+            <name>autoOuter</name>
+            <label>Scored Outer</label>
+            <type>int</type>
+            <!--
+            The int <type> which returns an single int value to the database 
+            -->
+            <default>0</default>
+            <min>0</min>
+            <max>15</max>
+        </field>
+        <field>
+            <!-- intChoice -->
+            <name>autoInner</name>
+            <label>Scored Inner</label>
+            <type>int</type>
+            <!--
+            The int <type> which returns an single int value to the database 
+            -->
+            <default>0</default>
+            <min>0</min>
+            <max>15</max>
+        </field>
+		<field>
+			<!-- radio -->
+			<name>startSide</name>
+			<!-- I don't think this might be necessary but I put it here anyways -->
+			<label>Starting Side</label>
+			<type>choice</type>
+			<default>0</default>
+			<choice>
+				<label>Goal</label>
+				<value>1</value>
+			</choice>
+			<choice>
+				<label>Middle</label>
+				<value>2</value>
+			</choice>
+			<choice>
+				<label>Feeder</label>
+				<value>3</value>
+			</choice>
+			<choice>
+				<label>Unknown</label>
+				<value>0</value>
+			</choice>
+		</field>
+		<field>
+			<!-- radio -->
+			<name>cross</name>
+			<label>Crossed the Line?</label>
+			<!-- find a better wording for this please!! -->
+			<type>choice</type>
+			<default>0</default>
+			<choice>
+				<label>towards goal</label>
+				<value>1</value>
+			</choice>
+			<choice>
+				<label>away goal</label>
+				<value>2</value>
+			</choice>
+			<choice>
+				<label>No</label>
+				<value>3</value>
+			</choice>
+			<choice>
+				<label>Unknown</label>
+				<value>0</value>
+			</choice>
+		</field>
+		<!-- Tele-Op portion -->
+		<field>
+			<!--  Event  -->
+			<name>ballPickupHuman</name>
+			<label>Pickup Human</label>
+			<type>event</type>
+			<!-- <eventType>start</eventType><eventTie>panel</eventTie> -->
+			<!-- Saw this in the old XML, not sure if we need this -->
+		</field>
+		<field>
+			<!--  Event  -->
+			<name>ballPickupGround</name>
+			<label>Pickup Ground</label>
+			<type>event</type>
+		</field>
+		<field>
+			<!--  Event  -->
+			<name>ballDropped</name>
+			<label>Dropped/Fed</label>
+			<type>event</type>
+		</field>
+		<field>
+			<!--  Event  -->
+			<name>ballScoredLower</name>
+			<label>Scored Lower</label>
+			<type>event</type>
+		</field>
+		<field>
+			<!--  Event  -->
+			<name>ballScoredOuter</name>
+			<label>Scored Outer</label>
+			<type>event</type>
+		</field>
+		<field>
+			<!--  Event  -->
+			<name>ballScoredInner</name>
+			<label>Scored Inner</label>
+			<type>event</type>
+		</field>
+		<field>
+			<!--  Event  -->
+			<name>endPickup</name>
+			<label>End Pickup</label>
+			<type>event</type>
+		</field>
+		<field>
+			<!--  Event  -->
+			<name>endShooting</name>
+			<label>End Shooting</label>
+			<type>event</type>
+		</field>
+		<field>
+			<name>shotsLocation</name>
+			<label>Shots Location</label>
+			<type>object</type>
+		</field>
+		<field>
+			<name>shotsMade</name>
+			<label>Shots Made</label>
+			<type>event</type>
+		</field>
+		<field>
+			<name>defenseTeam1</name>
+			<label>Defense?</label>
+			<type>choice</type>
+			<default>0</default>
+			<choice>
+				<label> </label>
+				<value>1</value>
+			</choice>
+			<choice>
+				<label>None</label>
+				<value>0</value>
+			</choice>
+		</field>
+		<field>
+			<name>defenseTeam2</name>
+			<label></label>
+			<type>choice</type>
+			<default>0</default>
+			<choice>
+				<label> </label>
+				<value>1</value>
+			</choice>
+			<choice>
+				<label>None</label>
+				<value>0</value>
+			</choice>
+			</field>
+		<field>
+			<name>defenseTeam3</name>
+			<label></label>
+			<type>choice</type>
+			<default>0</default>
+			<choice>
+				<label> </label>
+				<value>1</value>
+			</choice>
+			<choice>
+				<label>None</label>
+				<value>0</value>
+			</choice>
+		</field>
+		<field>
+			<!--  Event  -->
+			<name>startRotationControl</name>
+			<label>Start Rot Control</label>
+			<type>event</type>
+		</field>
+		<field>
+			<!--  Event  -->
+			<name>startColorControl</name>
+			<label>Start Color Control</label>
+			<type>event</type>
+		</field>
+		<field>
+			<!--  Event  -->
+			<name>successControl</name>
+			<label>Success</label>
+			<type>event</type>
+		</field>
+		<field>
+			<!--  Event  -->
+			<name>failControl</name>
+			<label>Failure</label>
+			<type>event</type>
+		</field>
+        <field>
+			<!-- radio -->
+			<name>stoopidFast</name>
+			<label>Speed</label>
+			<type>choice</type>
+			<default>0</default>
+			<choice>
+				<label>Fast</label>
+				<value>1</value>
+			</choice>
+			<choice>
+				<label>Average</label>
+				<value>2</value>
+			</choice>
+			<choice>
+				<label>Slow</label>
+				<value>3</value>
+			</choice>
+			<choice>
+				<label>Unknown</label>
+				<value>0</value>
+			</choice>
+		</field>
+        <field>
+			<!-- radio -->
+			<name>overBar</name>
+			<label>Barrier Traversal</label>
+			<type>choice</type>
+			<default>0</default>
+			<choice>
+				<label>No Problem</label>
+				<value>1</value>
+			</choice>
+			<choice>
+				<label>Iffy</label>
+				<value>2</value>
+			</choice>
+			<choice>
+				<label>Breakable</label>
+				<value>3</value>
+			</choice>
+            <choice>
+				<label>Unknown</label>
+				<value>0</value>
+			</choice>
+		</field>
+		<field>
+			<!-- radio -->
+			<name>rough</name>
+			<label>Roughness</label>
+			<type>choice</type>
+			<default>0</default>
+			<choice>
+				<label>Agressive</label>
+				<value>1</value>
+			</choice>
+            <choice>
+				<label>Medium</label>
+				<value>2</value>
+			</choice>
+			<choice>
+				<label>Passive</label>
+				<value>3</value>
+			</choice>
+			<choice>
+				<label>Unknown</label>
+				<value>0</value>
+			</choice>
+		</field>
+		<field>
+            <!-- intChoice -->
+            <name>maxPowerCells</name>
+            <label>Max Power Cells Held</label>
+            <type>int</type>
+            <!--
+            The int <type> which returns an single int value to the database 
+            -->
+            <default>0</default>
+            <min>0</min>
+            <max>5</max>
+        </field>
+		<!-- Questions for the bottom -->
+		<field>
+			<!--  Event  -->
+			<name>startClimb</name>
+			<label>Start Hang</label>
+			<type>event</type>
+		</field>
+		<field>
+			<!--  Event  -->
+			<name>endClimb</name>
+			<label>End Hang</label>
+			<type>event</type>
+		</field>
+        <field>
+			<!--  Event  -->
+			<name>failClimb</name>
+			<label>Failed Hang</label>
+			<type>event</type>
+		</field>
+        <field>
+			<!--  Event  -->
+			<name>brickClimb</name>
+			<label>Broke</label>
+			<type>event</type>
+		</field>
+		<field>
+			<name>endPosition</name>
+			<label>End Position</label>
+			<type>choice</type>
+			<default>0</default>
+			<choice>
+				<label>Field</label>
+				<value>1</value>
+			</choice>
+			<choice>
+				<label>Parked</label>
+				<value>2</value>
+			</choice>
+			<choice>
+				<label>Hanging</label>
+				<value>3</value>
+			</choice>
+			<choice>
+				<label>Unknown</label>
+				<value>0</value>
+			</choice>
+		</field>
+		<field>
+			<name>ifHanging</name>
+			<label>Extras</label>
+			<type>choice</type>
+			<choice>
+				<label>Buddied</label>
+				<value>1</value>
+			</choice>
+			<choice>
+				<label>Has Buddy</label>
+				<value>2</value>
+			</choice>
+			<choice>
+				<label>Balanced</label>
+				<value>3</value>
+			</choice>
+			<choice>
+				<label>Moveable</label>
+				<value>4</value>
+			</choice>
+		</field>
+        <field>
+            <name>trenchBot</name>
+            <label>Trenchbot?</label>
+            <type>choice</type>
+			<default>0</default>
+            <choice>
+                <label>Yes</label>
+                <value>1</value>
+            </choice>
+            <choice>
+                <label>No</label>
+                <value>2</value>
+            </choice>
+			<choice>
+                <label>Unknown</label>
+                <value>0</value>
+            </choice>
+        </field>
+		<field>
+            <name>flag</name>
+            <label>Flag</label>
+            <type>choice</type>
+            <choice>
+                <label> </label>
+                <value>1</value>
+            </choice>
+        </field>
+		<field>
+			<!-- Text input -->
+			<name>comments</name>
+			<label>Comments</label>
+			<type>text</type>
+		</field>
+        <field>
+			<name>defTeam1</name>
+			<label>Defense Team Number 1</label>
+			<type>text</type>
+		</field>
+        <field>
+			<name>defTeam2</name>
+			<label>Defense Team Number 2</label>
+			<type>text</type>
+		</field>
+        <field>
+			<name>defTeam3</name>
+			<label>Defense Team Number 3</label>
+			<type>text</type>
+		</field>
+	</elements>
+	<views>
+		<view>
+			<name>Alliance Planner (points)</name>
+			<type>table</type>
+			<label>
+			Compares point scoring performance for selected competitions for projected alliances.
+			</label>
+			<perspective>competition</perspective>
+			<constraint>year</constraint>
+			<constraint>robot</constraint>
+			<constraint>competition</constraint>
+			<field>robot</field>
+			<field>averageTotalScore</field>
+			<field>autoTotalScore</field>
+			<field>averageTeleopScore</field>
+			<field>realEndPosScore</field>
+			<!-- <field>pointsAAR</field> -->
+			<field>averagePowerCellsScored</field>
+			<field>maxPowerCellsScored</field>
+			<field>averagePowerCellsLower</field>
+			<field>averagePowerCellsOuter</field>
+			<field>averagePowerCellsInner</field>
+			<field>hangSuccess</field>
+			<field>startingLeft</field>
+			<field>startingMiddle</field>
+			<field>startingRight</field>
+			<field>maxPowerCells</field>
+			<field>crossSuccess</field>
+			<!-- cross percent in a "left and right direction %" -->
+			<!-- average score (and total it up) -->
+			<field>percentDefense</field>
+			<field>averageHangAttempts</field>
+			<!-- we need percent success for the controls: rotation and color -->
+			<!-- <field>averageRotationControlTime</field>
+			<field>averageColorControlTime</field> -->
+			<!-- <format>pointsAAR,toFixed,1</format> -->
+			<format>averageTotalScore,toFixed,2</format>
+			<format>autoTotalScore,toFixed,2</format>
+			<format>averageTeleopScore,toFixed,2</format>
+			<format>realEndPosScore,toFixed,2</format>
+			<format>averagePowerCellsInner,toFixed,2</format>
+			<format>averagePowerCellsScored,toFixed,2</format>
+			<format>averagePowerCellsLower,toFixed,2</format>
+			<format>averagePowerCellsOuter,toFixed,2</format>
+			<format>hangSuccess,toFixed,2</format>
+			<format>crossSuccess,toFixed,2</format>
+			<format>startingLeft,toFixed,2</format>
+			<format>startingMiddle,toFixed,2</format>
+			<format>startingRight,toFixed,2</format>
+			<format>percentDefense,toFixed,2</format>
+			<format>averageHangAttempts,toFixed,2</format>
+			<!-- <format>averageRotationControlTime,toFixed,2</format>
+			<format>averageColorControlTime,toFixed,2</format> -->
+			<!-- <average>pointsAAR</average>
+			<total>pointsAAR</total> -->
+			<total>averageTotalScore</total>
+			<total>autoTotalScore</total>
+			<total>averageTeleopScore</total>
+			<total>realEndPosScore</total>
+			<total>averagePowerCellsScored</total>
+			<total>percentDefense</total>
+			<option>robotGroup</option>
+		</view>
+
+		<view>
+			<name>Auto Alliance Planner</name>
+			<type>table</type>
+			<label>Alliance planner with more auto focused data</label>
+			<perspective>competition</perspective>
+			<constraint>year</constraint>
+			<constraint>competition</constraint>
+			<constraint>robot</constraint>
+			<field>robot</field>
+			<field>autoTotalScore</field>
+			<field>autoAAR</field>
+			<field>averageAutoLowerScore</field>
+			<field>averageAutoOuterScore</field>
+			<field>averageAutoInnerScore</field>
+			<field>averageAutoCrossScore</field>
+			<field>crossSuccess</field>
+			<field>autoAveragePowerCellsLower</field>
+			<field>autoAveragePowerCellsOuter</field>
+			<field>autoAveragePowerCellsInner</field>
+			<field>averagePreloadNum</field>
+			<field>averageAutoPickup</field>
+			<field>startingLeft</field>
+			<field>startingMiddle</field>
+			<field>startingRight</field>
+
+			<format>autoTotalScore,toFixed,2</format>
+			<format>autoAAR,toFixed,2</format>
+			<format>averageAutoLowerScore,toFixed,2</format>
+			<format>averageAutoOuterScore,toFixed,2</format>
+			<format>averageAutoInnerScore,toFixed,2</format>
+			<format>averageAutoCrossScore,toFixed,2</format>
+			<format>crossSuccess,toFixed,2</format>
+			<format>autoAveragePowerCellsLower,toFixed,2</format>
+			<format>autoAveragePowerCellsOuter,toFixed,2</format>
+			<format>autoAveragePowerCellsInner,toFixed,2</format>
+			<format>averagePreloadNum,toFixed,2</format>
+			<format>averageAutoPickup,toFixed,2</format>
+			<format>startingLeft,toFixed,2</format>
+			<format>startingMiddle,toFixed,2</format>
+			<format>startingRight,toFixed,2</format>
+
+			<total>autoTotalScore</total>
+			<total>averageAutoLowerScore</total>
+			<total>averageAutoOuterScore</total>
+			<total>averageAutoInnerScore</total>
+			<total>autoAveragePowerCellsLower</total>
+			<total>autoAveragePowerCellsOuter</total>
+			<total>autoAveragePowerCellsInner</total>
+			<total>averagePreloadNum</total>
+			<total>averageAutoPickup</total>
+			<option>robotGroup</option>
+		</view>
+
+		<view>
+			<name>Teleop Alliance Planner</name>
+			<type>table</type>
+			<label>Alliance planner with more teleop focused data</label>
+			<perspective>competition</perspective>
+			<constraint>year</constraint>
+			<constraint>competition</constraint>
+			<constraint>robot</constraint>
+
+			<field>robot</field>
+			<field>averageTeleopScore</field>
+			<field>cellAAR</field>
+			<field>averageTeleLowerScore</field>
+			<field>averageTeleOuterScore</field>
+			<field>averageTeleInnerScore</field>
+			<field>shotAccuracy</field>
+			<field>maxPowerCellsScored</field>
+			<field>minPowerCellsScored</field>
+			<field>maxPowerCells</field>
+			<field>controlAAR</field>
+			<field>averageRotationControlTime</field>
+			<field>averageColorControlTime</field>
+			<!--field: GAYDAR-->
+			<field>percentDefense</field>
+	
+			<format>averageTeleopScore,toFixed,2</format>
+			<format>cellAAR,toFixed,2</format>
+			<format>shotAccuracy,toFixed,2</format>
+			<format>averageTeleLowerScore,toFixed,2</format>
+			<format>averageTeleOuterScore,toFixed,2</format>
+			<format>averageTeleInnerScore,toFixed,2</format>
+			<format>controlAAR,toFixed,2</format>
+			<format>averageRotationControlTime,toFixed,2</format>
+			<format>averageColorControlTime,toFixed,2</format>
+
+			<total>averageTeleopScore</total>
+			<total>averageTeleLowerScore</total>
+			<total>averageTeleOuterScore</total>
+			<total>averageTeleInnerScore</total>
+
+			<option>robotGroup</option>
+		</view>
+
+		<view>
+			<name>Endgame Alliance Planner</name>
+			<type>table</type>
+			<label>Alliance planner with more endgame focused data</label>
+			<perspective>competition</perspective>
+			<constraint>year</constraint>
+			<constraint>competition</constraint>
+			<constraint>robot</constraint>
+
+			<field>robot</field>
+			<field>realEndPosScore</field>
+			<field>hangAAR</field>
+			<field>hangSuccess</field>
+			<field>hangTime</field>
+			<field>averageHangAttempts</field>
+			<field>balanceSuccess</field>
+			<!-- Possible fields
+				max endgame score
+				min endgame score
+				??? % end hanging
+					%end balance
+					%end parked???
+				avg number of hang attempts
+				hang time
+				max number of hang attempts
+				min number of hang attempts
+			-->
+			<format>realEndPosScore,toFixed,2</format>
+			<format>hangAAR,toFixed,2</format>
+			<format>hangSuccess,toFixed,2</format>
+			<format>hangTime,toFixed,2</format>
+			<format>averageHangAttempts,toFixed,2</format>
+			<format>balanceSuccess,toFixed,2</format>
+
+			<total>realEndPosScore</total>
+			
+			<option>robotGroup</option>
+		</view>
+		
+		
+		<view>
+			<name>Alliance Heat Map</name>
+			<label>Shows a heat map of groups of robots, separated by color</label>
+			<type>imagemap</type>
+			<subtype>heat</subtype>
+			<perspective>competition</perspective>
+			<constraint>year</constraint>
+			<constraint>robot</constraint>
+			<constraint>competition</constraint>
+			<field>robot</field>
+			<field>shotsLocation</field>
+			<option>size,688,363</option>
+			<option>image,https://nasa.chapresearch.com/Statistics/2020-FRC-Field-Detailed-459x242.png</option>
+			<option>robotGroup</option>
+		</view>
+		<view>
+			<name>Robot Match Heat Map</name>
+			<label>Shows a heat map of the locations from which the given robot took shots</label>
+			<type>imagemap</type>
+			<subtype>heat</subtype>
+			<perspective>match</perspective>
+			<constraint>year</constraint>
+			<constraint>robot</constraint>
+			<constraint>competition</constraint>
+			<constraint>match</constraint>
+			<field>match</field>
+			<field>shotsLocation</field>
+			<field>teamColor</field>
+			<option>size,688,363</option>
+			<option>image,https://nasa.chapresearch.com/Statistics/2020-FRC-Field-Detailed-459x242.png</option>
+		</view>
+	  	<view>
+			<name>Competition Heat Map</name>
+			<label>Shows a heat map of the shot locations from which the given robot(s) took shots</label>
+			<type>imagemap</type>
+			<subtype>heat</subtype>
+			<perspective>competition</perspective>
+			<constraint>year</constraint>
+			<constraint>robot</constraint>
+			<constraint>competition</constraint>
+			<field>robot</field>
+			<field>shotsLocation</field>
+			<option>size,688,363</option>
+			<option>image,https://nasa.chapresearch.com/Statistics/2020-FRC-Field-Detailed-459x242.png</option>
+		</view>
+		<view>
+			<name>Competition Color Split Heat Map</name>
+			<label>Shows a heat map of the red and blue shot locations for a single robot</label>
+			<type>imagemap</type>
+			<subtype>heat</subtype>
+			<perspective>match</perspective>
+			<constraint>year</constraint>
+			<constraint>robot</constraint>
+			<constraint>competition</constraint>
+			<field>match</field>
+			<field>shotsLocation</field>
+			<field>teamColor</field>
+			<option>size,688,363</option>
+			<option>image,https://nasa.chapresearch.com/Statistics/2020-FRC-Field-Detailed-459x242.png</option>
+			<option>colorSplit</option>
+		</view>
+		<view>
+			<name>Robot Total Power Cells Scored Trend</name>
+			<label>Trend of total power cells scored</label>
+			<type>trend</type>
+			<perspective>match</perspective>
+			<constraint>year</constraint>
+			<constraint>robot</constraint>
+			<constraint>competition</constraint>
+			<field>match</field>
+			<field>robot</field>
+			<field>totalPowerCellsScored</field>
+			<sort>match,ASC</sort>
+		</view>
+		<view>
+			<name>Auto Points Trend</name>
+			<label>Tend of points scored in auto</label>
+			<type>trend</type>
+			<perspective>match</perspective>
+			<constraint>year</constraint>
+			<constraint>robot</constraint>
+			<constraint>competition</constraint>
+			<field>match</field>
+			<field>robot</field>
+			<field>autoTotalScore</field>
+			<sort>match,ASC</sort>
+		</view>
+		<view>
+			<name>Teleop Points Trend</name>
+			<label>Tend of points scored in teleop</label>
+			<type>trend</type>
+			<perspective>match</perspective>
+			<constraint>year</constraint>
+			<constraint>robot</constraint>
+			<constraint>competition</constraint>
+			<field>match</field>
+			<field>robot</field>
+			<field>teleopScoreTotal</field>
+			<sort>match,ASC</sort>
+		</view>
+		<view>
+			<name>Endgame Points Trend</name>
+			<label>Tend of points scored in endgame</label>
+			<type>trend</type>
+			<perspective>match</perspective>
+			<constraint>year</constraint>
+			<constraint>robot</constraint>
+			<constraint>competition</constraint>
+			<field>match</field>
+			<field>robot</field>
+			<field>realEndPosScore</field>
+			<sort>match,ASC</sort>
+		</view>
+		<view>
+			<name>Total Points Trend</name>
+			<label>Tend of points scored</label>
+			<type>trend</type>
+			<perspective>match</perspective>
+			<constraint>year</constraint>
+			<constraint>robot</constraint>
+			<constraint>competition</constraint>
+			<field>match</field>
+			<field>robot</field>
+			<field>totalScore</field>
+			<sort>match,ASC</sort>
+		</view>
+		<view>
+			<name>Auto Scoring Location (pie)</name>
+			<label>Pie of the Points in Auto</label>
+			<type>pie</type>
+			<perspective>competition</perspective>
+			<constraint>year</constraint>
+			<constraint>robot</constraint>
+			<constraint>competition</constraint>
+			<!--<field>averageAutoCrossScore</field>-->
+			<field>averageAutoLowerScore</field>
+			<field>averageAutoOuterScore</field>
+			<field>averageAutoInnerScore</field>
+			<option>single</option>
+		</view>
+		<view>
+			<name>Teleop Scoring Location (pie)</name>
+			<label>Pie of the Points in Teleop and Endgame</label>
+			<type>pie</type>
+			<perspective>competition</perspective>
+			<constraint>year</constraint>
+			<constraint>robot</constraint>
+			<constraint>competition</constraint>
+			<field>averageRotationScore</field>
+			<field>averageColorScore</field>
+			<field>averageAutoLowerScore</field>
+			<field>averageAutoOuterScore</field>
+			<field>averageAutoInnerScore</field>
+			<!--<field>realEndPosScore</field>-->
+			<option>single</option>
+		</view>
+		<view>
+			<name>Average Match Points (pie)</name>
+			<label>Pie of the Expected Points in a Match</label>
+			<type>pie</type>
+			<perspective>competition</perspective>
+			<constraint>year</constraint>
+			<constraint>robot</constraint>
+			<constraint>competition</constraint>
+			<field>autoTotalScore</field>
+			<field>averageTeleopScore</field>
+			<field>realEndPosScore</field>
+			<option>single</option>
+		</view>
+		<view>
+			<name>Competition List</name>
+			<label>
+			Lists all of the robots at a particular competition - along with summary data.
+			</label>
+			<type>table</type>
+			<perspective>competition</perspective>
+			<constraint>competition</constraint>
+			<constraint>year</constraint>
+			<field>robot</field>
+			<field>competition</field>
+			<field>matchCount</field>
+			<field>averageTotalScore</field>
+			<field>autoTotalScore</field>
+			<field>averageTeleopScore</field>
+			<field>realEndPosScore</field>
+			<field>masterAAR</field>
+			<field>averagePowerCellsScored</field>
+			<!-- AAR -->
+			<field>averagePowerCellsLower</field>
+			<field>averagePowerCellsOuter</field>
+			<field>averagePowerCellsInner</field>
+			<field>averagePreloadNum</field>
+			<field>crossSuccess</field>
+			<field>startingLeft</field>
+			<field>startingMiddle</field>
+			<field>startingRight</field>
+			<field>shotAccuracy</field>
+			<field>totalCellScore</field>
+			<!-- <field>cellPerScore</field> -->
+			<field>averageRotationControlTime</field>
+			<field>averageColorControlTime</field>
+			<field>percentRotationControl</field>
+			<field>percentColorControl</field>
+			<field>percentDefense</field>
+			<!-- need % success for controls -->
+			<field>hangTime</field>
+			<field>averageHangAttempts</field>
+			<field>hangSuccess</field>
+			<field>balanceSuccess</field>
+			<field>buddyHangSuccess</field>
+			<field>maxPowerCellsScored</field>
+			<field>minPowerCellsScored</field>
+			<sort>robot,DESC</sort>
+			<format>averageRotationControlTime,toFixed,2</format>
+			<format>averagePreloadNum,toFixed,2</format>
+			<format>averageColorControlTime,toFixed,2</format>
+			<format>averagePowerCellsScored,toFixed,2</format>
+			<format>averagePowerCellsLower,toFixed,2</format>
+			<format>averagePowerCellsOuter,toFixed,2</format>
+			<format>averagePowerCellsInner,toFixed,2</format>
+			<format>averagePowerCellsScored,toFixed,2</format>
+			<format>startingLeft,toFixed,0</format>
+			<format>startingMiddle,toFixed,0</format>
+			<format>startingRight,toFixed,0</format>
+			<format>crossSuccess,toFixed,0</format>
+			<format>hangTime,toFixed,2</format>
+			<format>percentDefense,toFixed,0</format>
+			<format>masterAAR,toFixed,2</format>
+			<format>averageHangAttempts,toFixed,2</format>
+			<format>shotAccuracy,toFixed,2</format>
+			<format>hangSuccess,toFixed,2</format>
+			<format>balanceSuccess,toFixed,2</format>
+			<format>buddyHangSuccess,toFixed,2</format>
+		</view>
+		<!--<view> **unfinished because im not sure what the data for match number is...
+			<name>Match List</name>
+			<label>Gives all match information for a robot in a tournament</label>
+			<type>table</type>
+			<perspective>match</perspective>
+			<constraint>competition</constraint>
+			<constraint>year</constraint>
+			<constraint>robot</constraint>
+			<field>match</field>
+
+		</view>-->
+		<view>
+			<name>Robot Ranking (bar)</name>
+			<label>
+			Shows Master AAR rankings for all robots in a year.
+			</label>
+			<type>bar</type>
+			<perspective>competition</perspective>
+			<constraint>year</constraint>
+			<constraint>competition</constraint>
+			<field>robot</field>
+			<field>masterAAR</field>
+			<sort>masterAAR,ASC</sort>
+		</view>
+		<view>
+			<name>Robot Auto Point Ranking (bar)</name>
+			<label>
+			Shows auto rankings for all robots in a year.
+			</label>
+			<type>bar</type>
+			<perspective>competition</perspective>
+			<constraint>year</constraint>
+			<constraint>competition</constraint>
+			<field>robot</field>
+			<field>autoTotalScore</field>
+			<sort>autoTotalScore,ASC</sort>
+		</view>
+		<view>
+			<name>Robot Teleop Point Ranking (bar)</name>
+			<label>
+			Shows Teleop rankings for all robots in a year.
+			</label>
+			<type>bar</type>
+			<perspective>competition</perspective>
+			<constraint>year</constraint>
+			<constraint>competition</constraint>
+			<field>robot</field>
+			<field>averageTeleopScore</field>
+			<sort>averageTeleopScore,ASC</sort>
+		</view>
+		<view>
+			<name>Robot Endgame Ranking (bar)</name>
+			<label>
+			Shows Endgame rankings for all robots in a year.
+			</label>
+			<type>bar</type>
+			<perspective>competition</perspective>
+			<constraint>year</constraint>
+			<constraint>competition</constraint>
+			<field>robot</field>
+			<field>realEndPosScore</field>
+			<sort>realEndPosScore,ASC</sort>
+		</view>
+		<view>
+			<name>Robot Score/Cell Ranking (bar)</name>
+			<label>
+			Shows Score/Cell rankings for all robots in a year.
+			</label>
+			<type>bar</type>
+			<perspective>competition</perspective>
+			<constraint>year</constraint>
+			<constraint>competition</constraint>
+			<field>robot</field>
+			<field>scorepercell</field>
+			<sort>scorepercell,ASC</sort>
+		</view>
+		<view>
+			<name>Hang Success Ranking (bar)</name>
+			<label>
+			Shows ranking of all robots and their hangs in a year.
+			</label>
+			<type>bar</type>
+			<perspective>competition</perspective>
+			<constraint>year</constraint>
+			<constraint>competition</constraint>
+			<field>robot</field>
+			<field>hangSuccess</field>
+			<sort>hangSuccess,ASC</sort>
+		</view>
+		<view>
+		  <name>Comparative Cell Scoring</name>
+		  <label>Compares robots' different cell scoring capabilities.</label>
+		  <type>stacked</type>
+		  <perspective>competition</perspective>
+		  <constraint>year</constraint>
+		  <constraint>competition</constraint>
+		  <field>robot</field>
+		  <field>averagePowerCellsLower</field>
+		  <field>averagePowerCellsOuter</field>
+		  <field>averagePowerCellsInner</field>
+		</view>
+		<view>
+		  <name>Comparative Cell Score Scoring</name>
+		  <label>Compares robots' different cell scoring capabilities.</label>
+		  <type>stacked</type>
+		  <perspective>competition</perspective>
+		  <constraint>year</constraint>
+		  <constraint>competition</constraint>
+		  <field>robot</field>
+		  <field>totalLowerScore</field>
+		  <field>totalOuterScore</field>
+		  <field>totalInnerScore</field>
+		</view>
+		<!--<view>
+			Stacked AAR and DAR
+		</view>-->  
+	</views>
+	<!--I realize that the points aren't fully actuated. I'll work on the positions after I put them in the layout-->
+	<layout>
+		<!--  ############## PREMATCH ####################  -->
+		<field>
+			<type>text</type>
+			<label>Prematch and Auto</label>
+			<location>1,.5</location>
+		</field>
+		<field>
+			<!-- Number of Power Cells Preloaded -->
+			<type>intChoice</type>
+			<name>preloadNumber</name>
+			<optional>false</optional>
+            <default>0</default>
+			<layout>B</layout>
+			<location>9,3</location>
+		</field>
+		<field>
+			<!-- Number of Power Cells Fed or Being Fed-->
+			<type>intChoice</type>
+			<name>feedNum</name>
+			<optional>false</optional>
+            <default>0</default>
+			<layout>B</layout>
+			<location>9,8</location>
+		</field>
+		<field>
+			<!-- Number of Power Cells Picked up in Auto-->
+			<type>intChoice</type>
+			<name>autoPickup</name>
+			<optional>false</optional>
+            <default>0</default>
+			<layout>B</layout>
+			<location>9,13</location>
+		</field>
+		<field>
+			<!--  Start Side  -->
+			<type>radio</type>
+			<name>startSide</name>
+			<optional>false</optional>
+			<layout>B</layout>
+			<location>33,3</location>
+		</field>
+		<field>
+			<!--  Cross Starting Line  -->
+			<type>radio</type>
+			<name>cross</name>
+			<optional>false</optional>
+			<layout>R</layout>
+			<location>55,3</location>
+		</field>
+        <field>
+            <!--  Auto Shot Lower  -->
+            <type>intChoice</type>
+            <name>autoLower</name>
+            <default>0</default>
+            <layout>B</layout>
+            <location>80,1</location>
+        </field>
+        <field>
+            <!--  Auto Shot Outer  -->
+            <type>intChoice</type>
+            <name>autoOuter</name>
+            <default>0</default>
+            <layout>B</layout>
+            <location>80,7</location>
+        </field>
+        <field>
+            <!--  Auto Shot Inner  -->
+            <type>intChoice</type>
+            <name>autoInner</name>
+            <default>0</default>
+            <layout>B</layout>
+            <location>80,13</location>
+        </field>
+		<!--  TELEOP #######################  -->
+		<field>
+			<type>text</type>
+			<label>Teleop</label>
+			<location>1,19</location>
+		</field>
+		<field>
+			<type>text</type>
+			<label>Control</label>
+			<location>19,19.5</location>
+		</field>
+		<field>
+			<type>event</type>
+			<name>startRotationControl</name>
+			<ewid>control</ewid>
+			<location>2,22</location>
+        </field>
+		<field>
+			<type>event</type>
+			<name>startColorControl</name>
+			<ewid>control</ewid>
+			<location>2,27</location>
+        </field>
+		<field>
+			<type>event</type>
+			<name>successControl</name>
+			<ewid>control</ewid>
+			<location>2,32</location>
+        </field>
+		<field>
+			<type>event</type>
+			<name>failControl</name>
+			<ewid>control</ewid>
+			<location>10,32</location>
+        </field>
+		<field>
+			<type>text</type>
+			<label>Power Cell</label>
+			<location>45,19.5</location>
+		</field>
+		<field>
+			<type>event</type>
+			<name>ballPickupHuman</name>
+			<ewid>powerCell</ewid>
+			<location>46,22</location>
+		</field>
+		<field>
+			<type>event</type>
+			<name>ballPickupGround</name>
+			<ewid>powerCell</ewid>
+			<location>46,27</location>
+		</field>
+		<field>
+			<type>event</type>
+			<name>ballDropped</name>
+			<ewid>powerCell</ewid>
+			<location>46,32</location>
+		</field>
+        <field>
+	        <type>event</type>
+	        <name>ballScoredLower</name>
+    	    <ewid>powerCell</ewid>
+    	    <location>59.5,22</location>
+        </field>
+        <field>
+            <type>event</type>
+            <name>ballScoredOuter</name>
+            <ewid>powerCell</ewid>
+            <location>59.5,27</location>
+        </field>
+        <field>
+            <type>event</type>
+            <name>ballScoredInner</name>
+            <ewid>powerCell</ewid>
+            <location>59.5,32</location>
+        </field>
+	<field>
+	  <type>imageMapFlip</type>
+	  <name>shotsMade</name>
+	  <location>20,65</location>
+          <size>3,3</size>
+	</field>
+
+		<field>
+			<name>shotsMade</name>
+			<type>imageMap</type>
+			<location>24,41</location>
+			<size>70,27</size>
+			<subtype>event</subtype>
+			<style>heat</style>
+			<locationField>shotsLocation</locationField>
+			<imageb64>
+				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
+				</imageb64>
+			</field>
+		<field>
+			<!--  DEFENSE 1  -->
+			<type>radio</type>
+			<name>defenseTeam1</name>
+			<layout>B</layout>
+			<location>2,38</location>
+		</field>
+		<field>
+			<!--  DEFENSE 2  -->
+			<type>radio</type>
+			<name>defenseTeam2</name>
+			<layout>B</layout>
+			<location>2,48</location>
+		</field>
+		<field>
+			<!--  DEFENSE 3  -->
+			<type>radio</type>
+			<name>defenseTeam3</name>
+			<layout>B</layout>
+			<location>2,58</location>
+		</field>
+	<field>
+	    <name>defTeam1</name>
+	    <label></label>
+            <type>textInput</type>
+            <size>10,2</size>
+            <location>6,40</location>
+        </field>
+        <field>
+            <name>defTeam2</name>
+	    <label></label>
+            <type>textInput</type>
+            <size>10,2</size>
+            <location>6,50</location>
+        </field>
+        <field>
+            <name>defTeam3</name>
+	    <label></label>
+            <type>textInput</type>
+            <size>10,2</size>
+            <location>6,60</location>
+        </field>
+        <field>
+            <type>text</type>
+            <label>Endgame and Postgame Questions</label>
+            <location>1,70</location>
+        </field>
+        <!--  EVENTS FOR CLIMB  -->
+        <field>
+            <name>startClimb</name>
+            <type>event</type>
+            <ewid>climb</ewid>
+            <location>2,72.5</location>
+        </field>
+        <field>
+            <name>endClimb</name>
+            <type>event</type>
+            <ewid>climb</ewid>
+            <location>13,72.5</location>
+        </field>
+        <field>
+            <name>failClimb</name>
+            <type>event</type>
+            <ewid>climb</ewid>
+            <location>23,72.5</location>
+        </field>
+        <field>
+            <name>brickClimb</name>
+            <type>event</type>
+            <ewid>climb</ewid>
+            <location>35,72.5</location>
+        </field>
+    	<field>
+			<!--  Can it go under the Trench?  -->
+			<type>radio</type>
+			<name>trenchBot</name>
+			<optional>false</optional>
+			<layout>B</layout>
+			<location>60,72</location>
+		</field>
+        <field>
+			<!--  Is it stoopid fast?  -->
+			<type>radio</type>
+			<name>stoopidFast</name>
+			<optional>false</optional>
+			<layout>B</layout>
+			<location>79,72</location>
+		</field>
+		<field>
+			<!--  Roughness?  -->
+			<type>radio</type>
+			<name>rough</name>
+			<optional>false</optional>
+			<layout>B</layout>
+			<location>60,86</location>
+		</field>
+        <field>
+			<!--  Can it go over the bars?  -->
+			<type>radio</type>
+			<name>overBar</name>
+			<optional>false</optional>
+			<layout>B</layout>
+			<location>79,86</location>
+		</field>
+        <field>
+			<!--  End Position  -->
+			<type>radio</type>
+			<name>endPosition</name>
+			<optional>false</optional>
+			<layout>B</layout>
+			<location>42.5,72</location>
+		</field>
+		<field>
+			<!--  Extra Questionaire  -->
+			<type>checkbox</type>
+			<name>ifHanging</name>
+			<optional>true</optional>
+			<layout>B</layout>
+			<location>42.5,86</location>
+		</field>
+		<field>
+			<!--  flag match  -->
+			<type>checkbox</type>
+			<name>flag</name>
+			<optional>true</optional>
+			<layout>B</layout>
+			<location>23,86</location>
+		</field>
+		<field>
+			<!--  max   -->
+			<type>intChoice</type>
+			<name>maxPowerCells</name>
+			<optional>true</optional>
+			<layout>B</layout>
+			<location>23,92</location>
+		</field>
+		<!-- not sure about the ewid thing as well -->
+		<!-- sike I figured it out :)  -->
+		<field>
+			<type>eventWindow</type>
+			<ewid>powerCell</ewid>
+			<label>Power Cell Window</label>
+			<location>71,21.5</location>
+			<size>25,15</size>
+		</field>
+		<field>
+			<type>eventWindow</type>
+			<ewid>control</ewid>
+			<label>Control Window</label>
+			<location>18.5,21.5</location>
+			<size>24,15</size>
+		</field>
+		<field>
+			<type>eventWindow</type>
+			<ewid>climb</ewid>
+			<label>Climb Window</label>
+			<location>2,77</location>
+			<size>38,8</size>
+		</field>
+		<field>
+			<type>text</type>
+			<label>Shooting Cycle Locations</label>
+			<location>20,38</location>
+		</field>
+        <!-- Lines and Boxes and stuff  -->
+        <field>
+            <type>line</type>
+            <direction>horizontal</direction>
+            <length>98</length>
+            <location>1,18</location>
+            <color>red</color>
+        </field>
+		<field>
+            <type>line</type>
+            <direction>vertical</direction>
+            <length>29.5</length>
+            <location>18,38</location>
+            <color>red</color>
+        </field>
+		<field>
+            <type>line</type>
+            <direction>horizontal</direction>
+            <length>98</length>
+            <location>1,69</location>
+            <color>red</color>
+        </field>
+        <field>
+            <type>box</type>
+            <size>56,18.5</size>
+            <location>44,19</location>
+            <color>blue</color>
+        </field>
+		<!-- <field>
+			<type>text</type>
+			<label>Defense</label>
+			<location>1,38</location>
+		</field> -->
+        <!-- <field>
+            <type>box</type>
+            <size>33.27,30.5</size>
+            <location>0,37.5</location>
+            <color>green</color>
+        </field> -->
+		<field>
+            <name>comments</name>
+            <type>textInput</type>
+            <size>20,12</size>
+            <location>2,86</location>
+        </field>
+	</layout>
+    <metaData>
+	<!-- constants -->
+		<field>
+            <name>zero</name>
+            <label>zero</label>
+			<type>int</type>
+            <perspective>match</perspective>
+            <op>constant</op>
+            <target>0</target>
+        </field>
+		<field>
+            <name>one</name>
+            <label>one</label>
+			<type>int</type>
+            <perspective>match</perspective>
+            <op>constant</op>
+            <target>1</target>
+        </field>
+		<field>
+            <name>two</name>
+            <label>two</label>
+			<type>int</type>
+            <perspective>match</perspective>
+            <op>constant</op>
+            <target>2</target>
+        </field>
+		<field>
+            <name>three</name>
+            <label>three</label>
+			<type>int</type>
+            <perspective>match</perspective>
+            <op>constant</op>
+            <target>3</target>
+        </field>
+		<field>
+            <name>hundred</name>
+            <label>hundred</label>
+			<type>int</type>
+            <perspective>match</perspective>
+            <op>constant</op>
+            <target>100</target>
+        </field>
+		<field>
+            <name>autoLowerPoints</name>
+            <label>autoLowerPoints</label>
+			<type>int</type>
+            <perspective>match</perspective>
+            <op>constant</op>
+            <target>2</target>
+        </field>
+		<field>
+            <name>autoOuterPoints</name>
+            <label>autoOuterPoints</label>
+			<type>int</type>
+            <perspective>match</perspective>
+            <op>constant</op>
+            <target>4</target>
+        </field>
+		<field>
+            <name>autoInnerPoints</name>
+            <label>autoInnerPoints</label>
+			<type>int</type>
+            <perspective>match</perspective>
+            <op>constant</op>
+            <target>6</target>
+        </field>
+		<field>
+            <name>autoCrossPoints</name>
+            <label>autoCrossPoints</label>
+			<type>int</type>
+            <perspective>match</perspective>
+            <op>constant</op>
+            <target>5</target>
+        </field>
+		<field>
+            <name>teleLowerPoints</name>
+            <label>teleLowerPoints</label>
+			<type>int</type>
+            <perspective>match</perspective>
+            <op>constant</op>
+            <target>1</target>
+        </field>
+		<field>
+            <name>teleOuterPoints</name>
+            <label>teleOuterPoints</label>
+			<type>int</type>
+            <perspective>match</perspective>
+            <op>constant</op>
+            <target>2</target>
+        </field>
+		<field>
+            <name>teleInnerPoints</name>
+            <label>teleInnerPoints</label>
+			<type>int</type>
+            <perspective>match</perspective>
+            <op>constant</op>
+            <target>3</target>
+        </field>
+		<field>
+			<name>rotationPoints</name>
+			<type>int</type>
+			<perspective>match</perspective>
+			<label>Rot points</label>
+			<op>constant</op>
+			<target>10</target>
+		</field>
+		<field>
+			<name>colorPoints</name>
+			<type>int</type>
+			<perspective>match</perspective>
+			<label>Col points</label>
+			<op>constant</op>
+			<target>25</target>
+		</field>
+		<field>
+			<name>hangPoints</name>
+			<type>int</type>
+			<perspective>match</perspective>
+			<label>Rot points</label>
+			<op>constant</op>
+			<target>25</target>
+		</field>
+		<field>
+			<name>parkPoints</name>
+			<type>int</type>
+			<perspective>match</perspective>
+			<label>Rot points</label>
+			<op>constant</op>
+			<target>5</target>
+		</field>
+		<field>
+			<name>levelPoints</name>
+			<type>int</type>
+			<perspective>match</perspective>
+			<label>Rot points</label>
+			<op>constant</op>
+			<target>15</target>
+		</field>
+
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>matchCount</name>
+			<type>int</type>
+            <label># Matches</label>
+            <perspective>competition</perspective>
+            <op>count</op>
+            <target>startSide</target>
+        </field>
+
+		<!-- PREGAME & AUTO -->
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>averagePreloadNum</name>
+			<type>int</type>
+            <label>Average Power Cells Preloaded</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+            <target>preloadNumber</target>
+        </field>
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>averageFeedNum</name>
+			<type>int</type>
+            <label>Average Power Cells Dropped During Auto</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+            <target>feedNum</target>
+        </field>
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>averageAutoPickup</name>
+			<type>int</type>
+            <label>Average Power Cells Picked Up during Auto</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+            <target>autoPickup</target>
+        </field>
+		<field>
+            <name>crossSuccess</name>
+            <type>int</type>
+            <perspective>match</perspective>
+            <label>Success Crossing Starting Line</label>
+            <op>compare</op>
+            <target>cross</target>
+            <target>one</target>
+			<gtVal>1</gtVal>
+			<ltVal>0</ltVal>
+			<eqVal>1</eqVal>
+        </field>
+		<field>
+            <!--  Success in crossing starting line  -->
+            <name>crossSuccess</name>
+            <type>int</type>
+            <perspective>competition</perspective>
+            <label>Success Crossing Starting Line</label>
+            <op>percent</op>
+            <target>cross</target>
+			<targetVal>1</targetVal>	
+			<targetVal>2</targetVal>
+        </field>
+        <field>
+            <!--  % Left  -->
+            <name>startingLeft</name>
+            <type>int</type>
+            <perspective>competition</perspective>
+            <label>Percent Starting Goal</label>
+            <op>percent</op>
+            <target>startSide</target>
+            <targetVal>1</targetVal>
+        </field>
+        <field>
+            <!--  % Middle  -->
+            <name>startingMiddle</name>
+            <type>int</type>
+            <perspective>competition</perspective>
+            <label>Percent Starting Middle</label>
+            <op>percent</op>
+            <target>startSide</target>
+            <targetVal>2</targetVal>
+        </field>
+        <field>
+            <!--  % Right  -->
+            <name>startingRight</name>
+            <type>int</type>
+            <perspective>competition</perspective>
+            <label>Percent Starting Feeder</label>
+            <op>percent</op>
+            <target>startSide</target>
+            <targetVal>3</targetVal>
+        </field>
+		<field>
+            <!-- total Auto Shots -->
+            <name>autoScoreTotal</name>
+            <type>int</type>
+            <perspective>match</perspective>
+            <label>Total Power Cells Made in Auto</label>
+            <op>sum</op>
+            <target>autoLower</target>
+            <target>autoInner</target>
+            <target>autoOuter</target>
+        </field>
+		<field>
+            <!-- total Auto Intaken -->
+            <name>autoTotalIntake</name>
+            <type>int</type>
+            <perspective>match</perspective>
+            <label>Total Power Cells "Intaken" in Auto</label>
+            <op>sum</op>
+            <target>preloadNumber</target>
+            <target>autoPickup</target>
+        </field>
+		<field>
+            <!-- net total PCs in Auto -->
+            <name>autoNetTotalPowerCells</name>
+            <type>int</type>
+            <perspective>match</perspective>
+            <label>Net Total Power Cells</label>
+            <op>subtract</op>
+            <target>autoTotalIntake</target>
+            <target>feedNum</target>
+        </field>
+		<field>
+            <name>autoPercentLower</name>
+            <type>int</type>
+            <perspective>match</perspective>
+            <label>Percent Powers Cells Made in Lower During Auto</label>
+            <op>divide</op>
+            <target>autoLower</target>
+            <target>autoNetTotalPowerCells</target>
+        </field>
+		<field>
+            <name>autoPercentOuter</name>
+            <type>int</type>
+            <perspective>match</perspective>
+            <label>Percent Powers Cells Made in Outer During Auto</label>
+            <op>divide</op>
+            <target>autoOuter</target>
+            <target>autoNetTotalPowerCells</target>
+        </field>
+		<field>
+            <name>autoPercentInner</name>
+            <type>int</type>
+            <perspective>match</perspective>
+            <label>Percent Powers Cells Made in Inner During Auto</label>
+            <op>divide</op>
+            <target>autoInner</target>
+            <target>autoNetTotalPowerCells</target>
+        </field>
+		<field>
+            <name>percentAuto</name>
+            <type>int</type>
+            <perspective>match</perspective>
+            <label>Percent Powers Cells Made in Auto</label>
+            <op>divide</op>
+            <target>autoScoreTotal</target>
+            <target>autoNetTotalPowerCells</target>
+        </field>
+		<field>
+			<name>shotsLocation</name>
+			<type>array</type>
+			<label>Shots Locations per Competition</label>
+			<perspective>competition</perspective>
+			<op>flatten</op>
+			<target>shotsLocation</target>
+		</field>
+		<field>
+            <name>autoAveragePowerCellsLower</name>
+            <type>int</type>
+            <perspective>competition</perspective>
+            <label>Average Powers Cells Made in Lower during Auto</label>
+            <op>average</op>
+            <target>autoLower</target>
+        </field>
+		<field>
+            <name>autoAveragePowerCellsOuter</name>
+            <type>int</type>
+            <perspective>competition</perspective>
+            <label>Average Powers Cells Made in Outer during Auto</label>
+            <op>average</op>
+            <target>autoOuter</target>
+        </field>
+		<field>
+            <name>autoAveragePowerCellsInner</name>
+            <type>int</type>
+            <perspective>competition</perspective>
+            <label>Average Powers Cells Made in Inner during Auto</label>
+            <op>average</op>
+            <target>autoInner</target>
+        </field>
+		<field>
+			<name>autoCrossScore</name>
+			<type>int</type>
+			<perspective>match</perspective>
+			<label>Points for Crossing the Line during Auto</label>
+			<op>multiply</op>
+			<target>crossSuccess</target>
+			<target>autoCrossPoints</target>
+		</field>
+		<field>
+			<name>autoLowerScore</name>
+			<type>int</type>
+			<perspective>match</perspective>
+			<label>Auto Lower Points</label>
+			<op>multiply</op>
+			<target>autoLower</target>
+			<target>autoLowerPoints</target>
+		</field>
+		<field>
+			<name>autoOuterScore</name>
+			<type>int</type>
+			<perspective>match</perspective>
+			<label>Auto Outer Points</label>
+			<op>multiply</op>
+			<target>autoOuter</target>
+			<target>autoOuterPoints</target>
+		</field>
+		<field>
+			<name>autoInnerScore</name>
+			<type>int</type>
+			<perspective>match</perspective>
+			<label>Auto Inner Points</label>
+			<op>multiply</op>
+			<target>autoInner</target>
+			<target>autoInnerPoints</target>
+		</field>
+		<field>
+			<name>autoTotalScore</name>
+			<type>int</type>
+			<perspective>match</perspective>
+			<label>Auto Total Points</label>
+			<op>sum</op>
+			<target>autoCrossScore</target>
+			<target>autoLowerScore</target>
+			<target>autoOuterScore</target>
+			<target>autoInnerScore</target>
+		</field>
+		<field>
+			<name>averageAutoCrossScore</name>
+			<type>int</type>
+			<perspective>competition</perspective>
+			<label>Auto Cross Points</label>
+			<op>average</op>
+			<target>autoCrossScore</target>
+		</field>
+		<field>
+			<name>averageAutoLowerScore</name>
+			<type>int</type>
+			<perspective>competition</perspective>
+			<label>Average Auto Lower Points</label>
+			<op>average</op>
+			<target>autoLowerScore</target>
+		</field>
+		<field>
+			<name>averageAutoOuterScore</name>
+			<type>int</type>
+			<perspective>competition</perspective>
+			<label>Average Auto Outer Points</label>
+			<op>average</op>
+			<target>autoOuterScore</target>
+		</field>
+		<field>
+			<name>averageAutoInnerScore</name>
+			<type>int</type>
+			<perspective>competition</perspective>
+			<label>Average Auto Inner Points</label>
+			<op>average</op>
+			<target>autoInnerScore</target>
+		</field>
+		<field>
+			<name>autoTotalScore</name>
+			<type>int</type>
+			<perspective>competition</perspective>
+			<label>Average Auto Points</label>
+			<op>average</op>
+			<target>autoTotalScore</target>
+		</field>
+
+		<!-- TELE-OP -->
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>cellPickupHuman</name>
+            <label>Pickup Human</label>
+            <perspective>match</perspective>
+            <op>count</op>
+            <target>ballPickupHuman</target>
+        </field>
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>cellPickupGround</name>
+            <label>Pickup Ground</label>
+            <perspective>match</perspective>
+            <op>count</op>
+            <target>ballPickupGround</target>
+        </field>
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>cellDrop</name>
+            <label>Dropped Cells</label>
+            <perspective>match</perspective>
+            <op>count</op>
+            <target>ballDropped</target>
+        </field>
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>cellDroppedTotal</name>
+            <label>total cells fed</label>
+            <perspective>match</perspective>
+            <op>sum</op>
+            <target>cellDrop</target>
+			<target>feedNum</target>
+        </field>
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>cellPickupTotal</name>
+            <label>Pickup</label>
+            <perspective>match</perspective>
+            <op>sum</op>
+            <target>cellPickupGround</target>
+			<target>cellPickupHuman</target>
+        </field>
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>totalCellPickup</name>
+            <label>Total Pickup</label>
+            <perspective>match</perspective>
+            <op>sum</op>
+            <target>cellPickupTotal</target>
+			<target>autoPickup</target>
+        </field>
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>totalCellsShot</name>
+            <label>Denominator</label>
+            <perspective>match</perspective>
+            <op>subtract</op>
+			<target>totalCellPickup</target>
+            <target>cellDroppedTotal</target>
+        </field>
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>missDenominator</name>
+            <label>Miss Denominator</label>
+            <perspective>match</perspective>
+            <op>subtract</op>
+			<target>totalCellPickup</target>
+            <target>cellDroppedTotal</target>
+        </field>
+        <field>
+            <!--  totals needed for computing AAR  -->
+            <name>telePowerCellsLower</name>
+            <label>Total Power Cells in Lower</label>
+            <perspective>match</perspective>
+            <op>count</op>
+            <target>ballScoredLower</target>
+        </field>
+        <field>
+            <!--  totals needed for computing AAR  -->
+            <name>telePowerCellsOuter</name>
+            <label>Total Power Cells in Outer</label>
+            <perspective>match</perspective>
+            <op>count</op>
+            <target>ballScoredOuter</target>
+        </field>
+        <field>
+            <!--  totals needed for computing AAR  -->
+            <name>telePowerCellsInner</name>
+            <label>Total Power Cells in Inner</label>
+            <perspective>match</perspective>
+            <op>count</op>
+            <target>ballScoredInner</target>
+        </field>
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>totalPowerCellsLower</name>
+            <label>Total Power Cells in Lower</label>
+            <perspective>match</perspective>
+            <op>sum</op>
+            <target>telePowerCellsLower</target>
+			<target>autoLower</target>
+        </field>
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>totalPowerCellsOuter</name>
+            <label>Total Power Cells in Outer</label>
+            <perspective>match</perspective>
+            <op>sum</op>
+            <target>telePowerCellsOuter</target>
+			<target>autoOuter</target>
+        </field>
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>totalPowerCellsInner</name>
+            <label>Total Power Cells in Inner</label>
+            <perspective>match</perspective>
+            <op>sum</op>
+            <target>telePowerCellsInner</target>
+			<target>autoInner</target>
+        </field>
+		<field>
+			<name>teleLowerScore</name>
+			<type>int</type>
+			<perspective>match</perspective>
+			<label>Lower Points</label>
+			<op>multiply</op>
+			<target>telePowerCellsLower</target>
+			<target>teleLowerPoints</target>
+		</field>
+		<field>
+			<name>teleOuterScore</name>
+			<type>int</type>
+			<perspective>match</perspective>
+			<label>Outer Points</label>
+			<op>multiply</op>
+			<target>telePowerCellsOuter</target>
+			<target>teleOuterPoints</target>
+		</field>
+		<field>
+			<name>teleInnerScore</name>
+			<type>int</type>
+			<perspective>match</perspective>
+			<label>Inner Points</label>
+			<op>multiply</op>
+			<target>telePowerCellsInner</target>
+			<target>teleInnerPoints</target>
+		</field>
+		<field>
+			<name>totalTeleopCellScore</name>
+			<type>int</type>
+			<perspective>match</perspective>
+			<label>Teleop Cell Total Points</label>
+			<op>sum</op>
+			<target>teleLowerScore</target>
+			<target>teleOuterScore</target>
+			<target>teleInnerScore</target>
+		</field>
+		<field>
+			<name>averageTeleLowerScore</name>
+			<type>int</type>
+			<perspective>competition</perspective>
+			<label>Teleop Lower Points</label>
+			<op>average</op>
+			<target>teleLowerScore</target>
+		</field>
+		<field>
+			<name>averageTeleOuterScore</name>
+			<type>int</type>
+			<perspective>competition</perspective>
+			<label>Teleop Outer Points</label>
+			<op>average</op>
+			<target>teleOuterScore</target>
+		</field>
+		<field>
+			<name>averageTeleInnerScore</name>
+			<type>int</type>
+			<perspective>competition</perspective>
+			<label>Teleop Inner Points</label>
+			<op>average</op>
+			<target>teleInnerScore</target>
+		</field>
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>telePowerCellsScored</name>
+            <label>Total Power Cells Scored in Teleop</label>
+            <perspective>match</perspective>
+            <op>sum</op>
+            <target>telePowerCellsLower</target>
+            <target>telePowerCellsOuter</target>
+            <target>telePowerCellsInner</target>
+        </field>
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>cellPerScore</name>
+            <label>Cell/Score</label>
+            <perspective>match</perspective>
+            <op>divide</op>
+            <target>telePowerCellsScored</target>
+			<target>totalTeleopCellScore</target>
+        </field>
+		<field>
+			<name>averageTeleCellScore</name>
+			<type>int</type>
+			<perspective>match</perspective>
+			<label>Cell Average Points</label>
+			<op>average</op>
+			<target>totalTeleopCellScore</target>
+		</field>
+		<field>
+			<name>totalCellScore</name>
+			<type>int</type>
+			<perspective>match</perspective>
+			<label>Cell Total Points</label>
+			<op>sum</op>
+			<target>totalTeleopCellScore</target>
+			<target>autoScoreTotal</target>
+		</field>
+		<field>
+			<name>averageCellScore</name>
+			<type>int</type>
+			<perspective>match</perspective>
+			<label>Cell Total Points</label>
+			<op>average</op>
+			<target>totalCellScore</target>
+		</field>
+        <field>
+            <!--  totals needed for computing AAR  -->
+            <name>totalPowerCellsScored</name>
+			<type>int</type>
+            <label>Total Power Cells Scored</label>
+            <perspective>match</perspective>
+            <op>sum</op>
+            <target>totalPowerCellsLower</target>
+            <target>totalPowerCellsOuter</target>
+            <target>totalPowerCellsInner</target>
+        </field>
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>cellsExitedTotal</name>
+            <label>Exited Cells</label>
+            <perspective>match</perspective>
+            <op>sum</op>
+            <target>totalPowerCellsScored</target>
+			<target>cellDroppedTotal</target>
+        </field>
+		<field>
+            <!--  totals needed for computing AAR  -->
+            <name>missNumerator</name>
+            <label>Miss Numerator</label>
+            <perspective>match</perspective>
+            <op>sum</op>
+            <target>totalPowerCellsScored</target>
+			<target>cellDroppedTotal</target>
+        </field>
+		<!-- <field>
+            <name>missPercent</name>
+            <label>% Accuracy</label>
+            <perspective>match</perspective>
+            <op>divide</op>
+            <target>missNumerator</target>
+			<target>missDenominator</target>
+        </field> -->
+		<field>
+			<name>shotAccuracy</name>
+			<label>% Accuracy</label>
+			<perspective>match</perspective>
+			<op>divide</op>
+			<target>totalPowerCellsScored</target>
+			<target>totalCellPickup</target>
+		</field>
+		<field>
+			<name>shotAccuracy</name>
+			<label>% Accuracy</label>
+			<perspective>competition</perspective>
+			<op>average</op>
+			<target>shotAccuracy</target>
+		</field>
+		<!-- <field>
+            <name>missPercent</name>
+            <label>Miss %</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+            <target>missPercent</target>
+        </field> -->
+        <field>
+            <name>averagePowerCellsScored</name>
+            <type>int</type>
+            <label>Average Power Cells Scored</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+            <target>totalPowerCellsScored</target>
+        </field>
+        <field>
+            <name>averagePowerCellsLower</name>
+            <type>int</type>
+            <label>Average Power Cells Scored in Lower</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+            <target>totalPowerCellsLower</target>
+        </field>
+        <field>
+            <name>averagePowerCellsOuter</name>
+            <type>int</type>
+            <label>Average Power Cells Scored in Outer</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+            <target>totalPowerCellsOuter</target>
+        </field>
+        <field>
+            <name>averagePowerCellsInner</name>
+            <type>int</type>
+            <label>Average Power Cells Scored in Inner</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+            <target>totalPowerCellsInner</target>
+        </field>
+		<!-- found percentages of scoring locations through the average -->
+		<field>
+            <name>percentLower</name>
+            <type>int</type>
+            <label>Percent Power Cells Scored in Lower</label>
+            <perspective>competition</perspective>
+            <op>divide</op>
+            <target>averagePowerCellsLower</target>
+			<target>averagePowerCellsScored</target>
+        </field>
+		<field>
+            <name>percentOuter</name>
+            <type>int</type>
+            <label>Percent Power Cells Scored in Outer</label>
+            <perspective>competition</perspective>
+            <op>divide</op>
+            <target>averagePowerCellsOuter</target>
+			<target>averagePowerCellsScored</target>
+        </field>
+		<field>
+            <name>percentInner</name>
+            <type>int</type>
+            <label>Percent Power Cells Scored in Inner</label>
+            <perspective>competition</perspective>
+            <op>divide</op>
+            <target>averagePowerCellsInner</target>
+			<target>averagePowerCellsScored</target>
+        </field>
+        <field>
+            <!--  Min Power Cells  -->
+            <name>minPowerCellsScored</name>
+            <type>int</type>
+            <label>Min Power Cells Scored</label>
+            <perspective>competition</perspective>
+            <op>min</op>
+            <target>totalPowerCellsScored</target>
+        </field>
+        <field>
+            <!--  Max Power Cells  -->
+            <name>maxPowerCellsScored</name>
+            <type>int</type>
+            <label>Max Power Cells Scored</label>
+            <perspective>competition</perspective>
+            <op>max</op>
+            <target>totalPowerCellsScored</target>
+        </field>
+		<field>
+            <name>maxPowerCells</name>
+            <label>Max Cells</label>
+			<type>int</type>
+            <perspective>competition</perspective>
+            <op>max</op>
+            <target>maxPowerCells</target>
+        </field>
+		<field>
+            <name>totalLowerScore</name>
+            <type>int</type>
+            <label>Power Cells Lower Score</label>
+            <perspective>match</perspective>
+            <op>sum</op>
+            <target>autoLowerScore</target>
+			<target>teleLowerScore</target>
+        </field>
+		<field>
+            <name>totalOuterScore</name>
+            <type>int</type>
+            <label>Power Cells Outer Score</label>
+            <perspective>match</perspective>
+            <op>sum</op>
+            <target>autoOuterScore</target>
+			<target>teleOuterScore</target>
+        </field>
+		<field>
+            <name>totalInnerScore</name>
+            <type>int</type>
+            <label>Power Cells Inner Score</label>
+            <perspective>match</perspective>
+            <op>sum</op>
+            <target>autoInnerScore</target>
+			<target>teleInnerScore</target>
+        </field>
+		<field>
+            <name>totalLowerScore</name>
+            <type>int</type>
+            <label>Avg Power Cells Lower Score</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+            <target>totalLowerScore</target>
+        </field>
+		<field>
+            <name>totalOuterScore</name>
+            <type>int</type>
+            <label>Avg Power Cells Outer Score</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+            <target>totalOuterScore</target>
+        </field>
+		<field>
+            <name>totalInnerScore</name>
+            <type>int</type>
+            <label>Avg Power Cells Inner Score</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+            <target>totalInnerScore</target>
+        </field>
+
+        <field>
+            <name>rotationControlTime</name>
+            <type>int</type>
+            <label>Rotation Time</label>
+            <perspective>match</perspective>
+            <op>delta2</op>
+			<start>startRotationControl</start>
+			<end>successControl</end>
+        </field>
+		<field>
+            <name>averageRotationControlTime</name>
+            <type>int</type>
+            <label>Avg Rotation Control Time</label>
+            <perspective>match</perspective>
+            <op>average</op>
+			<target>rotationControlTime</target>
+        </field>
+		<field>
+			<name>rotationAttemps</name>
+			<type>int</type>
+			<label>Rotation Control Attemps</label>
+			<perspective>competition</perspective>
+			<op>count</op>
+			<target>startRotationControl</target>
+		</field>
+		<field>
+			<name>colorAttemps</name>
+			<type>int</type>
+			<label>Color Control Attemps</label>
+			<perspective>competition</perspective>
+			<op>count</op>
+			<target>startColorControl</target>
+		</field>
+		<field>
+            <name>rotationControlBinary</name>
+            <type>int</type>
+            <label>Rotation Control</label>
+            <perspective>match</perspective>
+            <op>count</op>
+			<target>rotationControlTime</target>
+        </field>
+		<field>
+            <name>noRotationControl</name>
+            <type>int</type>
+            <label>% no Rot Control</label>
+            <perspective>competition</perspective>
+            <op>percent</op>
+			<target>rotationControlBinary</target>
+			<targetVal>0</targetVal>
+        </field>
+		<field>
+            <name>percentRotationControl</name>
+            <type>int</type>
+            <label>% Rot Control</label>
+            <perspective>competition</perspective>
+            <op>subtract</op>
+			<target>hundred</target>
+			<target>noRotationControl</target>
+        </field>
+		<field>
+			<name>rotationControlScore</name>
+            <type>int</type>
+            <label>Rotation Control Score</label>
+            <perspective>match</perspective>
+            <op>compare</op>
+			<target>rotationControlBinary</target>
+			<target>zero</target>
+			<ltVal>0</ltVal>
+			<gtVal>10</gtVal>
+			<eqVal>0</eqVal>
+		</field>
+		<field>
+			<name>averageRotationScore</name>
+            <type>int</type>
+            <label>Average Rotation Control Score</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+			<target>rotationControlScore</target>
+		</field>
+		<field>
+            <name>colorControlTime</name>
+            <type>int</type>
+            <label>Color Time</label>
+            <perspective>match</perspective>
+            <op>delta2</op>
+			<start>startColorControl</start>
+			<end>successControl</end>
+        </field>
+		<field>
+            <name>averageColorControlTime</name>
+            <type>int</type>
+            <label>Avg Color Control Time</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+			<target>colorControlTime</target>
+        </field>
+		<field>
+            <name>colorControlBinary</name>
+            <type>int</type>
+            <label>Color Control</label>
+            <perspective>match</perspective>
+            <op>count</op>
+			<target>colorControlTime</target>
+        </field>
+		<field>
+            <name>noColorControl</name>
+            <type>int</type>
+            <label>% no Col Control</label>
+            <perspective>competition</perspective>
+            <op>percent</op>
+			<target>colorControlBinary</target>
+			<targetVal>0</targetVal>
+        </field>
+		<field>
+            <name>percentColorControl</name>
+            <type>int</type>
+            <label>% Col Control</label>
+            <perspective>competition</perspective>
+            <op>subtract</op>
+			<target>hundred</target>
+			<target>noColorControl</target>
+        </field>
+		<field>
+			<name>colorControlScore</name>
+            <type>int</type>
+            <label>Color Control Score</label>
+            <perspective>match</perspective>
+            <op>compare</op>
+			<target>colorControlBinary</target>
+			<target>zero</target>
+			<ltVal>0</ltVal>
+			<gtVal>25</gtVal>
+			<eqVal>0</eqVal>
+		</field>
+		<field>
+			<name>averageColorScore</name>
+            <type>int</type>
+            <label>Average Color Control Score</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+			<target>colorControlBinary</target>
+		</field>
+		<field>
+			<name>averageTeleCellScore</name>
+            <type>int</type>
+            <label>Average Teleop Score</label>
+            <perspective>competition</perspective>
+            <op>sum</op>
+			<target>averageTeleInnerScore</target>
+			<target>averageTeleLowerScore</target>
+			<target>averageTeleOuterScore</target>
+		</field>
+		<field>
+			<name>averageTeleopScore</name>
+            <type>int</type>
+            <label>Average Teleop Score</label>
+            <perspective>competition</perspective>
+            <op>sum</op>
+			<target>averageTeleInnerScore</target>
+			<target>averageTeleLowerScore</target>
+			<target>averageTeleOuterScore</target>
+			<target>averageRotationScore</target>
+			<target>averageColorScore</target>
+		</field>
+		<field>
+			<name>teleopScoreTotal</name>
+            <type>int</type>
+            <label>Total Teleop Score</label>
+            <perspective>match</perspective>
+            <op>sum</op>
+			<target>teleInnerScore</target>
+			<target>teleLowerScore</target>
+			<target>teleOuterScore</target>
+			<target>rotationScore</target>
+			<target>colorScore</target>
+		</field>
+		<field>
+            <name>totalDef</name>
+            <type>int</type>
+            <perspective>match</perspective>
+            <label>Defense-ish</label>
+            <op>sum</op>
+            <target>defenseTeam1</target>
+			<target>defenseTeam2</target>
+			<target>defenseTeam3</target>
+        </field>
+		<field>
+            <name>binaryDef</name>
+            <type>int</type>
+            <label>Defense-almost</label>
+            <perspective>match</perspective>
+            <op>compare</op>
+            <target>totalDef</target>
+            <target>zero</target>
+			<ltVal>2</ltVal>
+            <gtVal>1</gtVal>
+            <eqVal>3</eqVal>
+        </field>
+		<field>
+            <name>percentDefense</name>
+            <type>int</type>
+            <label>% Def</label>
+            <perspective>competition</perspective>
+            <op>percent</op>
+			<target>binaryDef</target>
+			<targetVal>1</targetVal>
+        </field>
+		<field>
+            <name>scorepercell</name>
+            <type>int</type>
+            <label>Score/Cell</label>
+            <perspective>competition</perspective>
+            <op>divide</op>
+			<target>averageTeleCellScore</target>
+			<target>averagePowerCellsScored</target>
+        </field>
+		<!-- Endgame Metadata -->
+		<field>
+            <name>hangTime</name>
+            <type>int</type>
+            <label>Hang Time</label>
+            <perspective>match</perspective>
+            <op>delta2</op>
+			<start>startClimb</start>
+			<end>endClimb</end>
+        </field>
+		<field>
+            <name>hangTime</name>
+            <type>int</type>
+            <label>Hang Time</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+			<target>hangTime</target>
+        </field>
+		<field>
+            <name>startHang</name>
+            <type>int</type>
+            <label>Amt of Start Hangs</label>
+            <perspective>match</perspective>
+            <op>count</op>
+			<target>startClimb</target>
+        </field>
+		<field>
+			<name>totalHangAttempts</name>
+            <type>int</type>
+            <label>Amt of Start Hangs</label>
+            <perspective>competition</perspective>
+            <op>count</op>
+			<target>startClimb</target>
+		</field>
+		<field>
+			<name>averageHangAttempts</name>
+            <type>int</type>
+            <label>Avg # Hang Attmpts</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+			<target>startHang</target>
+		</field>
+		<field>
+            <name>countStartHang</name>
+            <type>int</type>
+            <label>Amt of Start Hangs</label>
+            <perspective>competition</perspective>
+            <op>sum</op>
+			<target>startHang</target>
+        </field>
+		<field>
+            <name>endHang</name>
+            <type>int</type>
+            <label>Amt of Start Hangs</label>
+            <perspective>match</perspective>
+            <op>count</op>
+			<target>endClimb</target>
+        </field>
+		<field>
+            <name>countEndHang</name>
+            <type>int</type>
+            <label>Amt of Start Hangs</label>
+            <perspective>competition</perspective>
+            <op>sum</op>
+			<target>endHang</target>
+        </field>
+		<field>
+            <name>complexHangSuccess</name>
+            <type>int</type>
+            <label>Big Brain Hang Success</label>
+            <perspective>competition</perspective>
+            <op>divide</op>
+			<target>countStartHang</target>
+			<target>countEndHang</target>
+        </field>
+		<field>
+            <!--  Just Hanging Success  -->
+            <name>hangSuccess</name>
+            <type>int</type>
+            <label>Percent Hang</label>
+            <perspective>competition</perspective>
+            <op>percent</op>
+            <target>endPosition</target>
+			<targetVal>3</targetVal>
+        </field>
+        <field>
+            <!--  Buddy Success  -->
+            <name>buddyHangSuccess</name>
+            <type>int</type>
+            <label>% Buddy Hang</label>
+            <perspective>competition</perspective>
+            <op>percent</op>
+            <target>ifHanging</target>
+            <targetVal>2</targetVal>
+        </field>
+		<field>
+            <!--  Buddy Success  -->
+            <name>moveablitySuccess</name>
+            <type>int</type>
+            <label>Moveable in Hang</label>
+            <perspective>competition</perspective>
+            <op>percent</op>
+            <target>ifHanging</target>
+            <targetVal>4</targetVal>
+        </field>
+		<field>
+            <!--  Buddied Success  -->
+            <name>buddiedSuccess</name>
+            <type>int</type>
+            <label>% Buddied Hang</label>
+            <perspective>competition</perspective>
+            <op>percent</op>
+            <target>ifHanging</target>
+            <targetVal>1</targetVal>
+        </field>
+		<field>
+            <!--  Buddy Success  -->
+            <name>balanceSuccess</name>
+            <type>int</type>
+            <label>% Balance</label>
+            <perspective>competition</perspective>
+            <op>percent</op>
+            <target>ifHanging</target>
+            <targetVal>3</targetVal>
+        </field>
+		<field>
+			<name>endPosScore</name>
+			<type>int</type>
+			<label>End Position Score</label>
+			<perspective>match</perspective>
+			<op>compare</op>
+			<target>endPosition</target>
+			<target>two</target>
+			<ltVal>0</ltVal>
+			<gtVal>25</gtVal>
+			<eqVal>5</eqVal>
+		</field>
+		<field>
+			<name>buddierScores</name>
+			<type>int</type>
+			<label>Buddier Score</label>
+			<perspective>match</perspective>
+			<op>compare</op>
+			<target>ifHanging</target>
+			<target>two</target>
+			<ltVal>0</ltVal>
+			<gtVal>0</gtVal>
+			<eqVal>25</eqVal>
+		</field>
+		<field>
+			<name>balanceScore</name>
+			<type>int</type>
+			<label>Balance Score</label>
+			<perspective>match</perspective>
+			<op>compare</op>
+			<target>ifHanging</target>
+			<target>three</target>
+			<ltVal>0</ltVal>
+			<gtVal>0</gtVal>
+			<eqVal>15</eqVal>
+		</field>
+		<field>
+			<name>buddieeScores</name>
+			<type>int</type>
+			<label>Budiee Score</label>
+			<perspective>match</perspective>
+			<op>compare</op>
+			<target>ifHanging</target>
+			<target>one</target>
+			<ltVal>0</ltVal>
+			<gtVal>0</gtVal>
+			<eqVal>-25</eqVal>
+		</field>
+		<field>
+			<name>realEndPosScore</name>
+			<type>int</type>
+			<label>End Position Score</label>
+			<perspective>match</perspective>
+			<op>sum</op>
+			<target>endPosScore</target>
+			<target>buddieeScores</target>
+			<target>buddierScores</target>
+			<target>balanceScore</target>
+		</field>
+		<field>
+			<name>realEndPosScore</name>
+			<type>int</type>
+			<label>Average End Position Score</label>
+			<perspective>competition</perspective>
+			<op>average</op>
+			<target>realEndPosScore</target>
+		</field>
+		<field>
+			<name>balanced</name>
+			<type>int</type>
+			<label>If Balanced</label>
+			<perspective>match</perspective>
+			<op>contains</op>
+			<target>ifHanging</target>
+			<targetVal>3</targetVal>
+		</field>
+		<field>
+			<name>levelScore</name>
+			<type>int</type>
+			<label>Leveled Hang Score</label>
+			<perspective>match</perspective>
+			<op>multiply</op>
+			<target>balanced</target>
+			<target>levelPoints</target>
+		</field>
+		<field>
+            <name>averageEndPositionScore</name>
+			<type>int</type>
+            <label>Average End Position Score</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+            <target>endPosScore</target>
+        </field>
+		<field>
+            <name>levelScore</name>
+			<type>int</type>
+            <label>Average Level Score</label>
+            <perspective>competition</perspective>
+            <op>average</op>
+            <target>levelScore</target>
+        </field>
+        <field>
+            <!--  % Fast  -->
+            <name>percentFast</name>
+            <type>int</type>
+            <perspective>match</perspective>
+            <label>Percent Fast</label>
+            <op>contains</op>
+            <target>stoopidFast</target>
+            <targetVal>1</targetVal>
+        </field>
+		<field>
+            <name>averageTotalScore</name>
+            <type>int</type>
+            <perspective>competition</perspective>
+            <label>Average Score</label>
+            <op>sum</op>
+            <target>autoTotalScore</target>
+			<target>averageTeleopScore</target>
+			<target>realEndPosScore</target>
+        </field>
+		<field>
+            <name>totalScore</name>
+            <type>int</type>
+            <perspective>match</perspective>
+            <label>Average Score</label>
+            <op>sum</op>
+            <target>autoTotalScore</target>
+			<target>teleopScoreTotal</target>
+			<target>realEndPosScore</target>
+        </field>
+		<!-- AHIR's ANALYSIS RANKING CUZ I HATE MYSELF -->
+		
+		<field>
+			<name>autoAAR</name>
+			<type>number</type>
+			<label>Auto AAR</label>
+			<perspective>competition</perspective>
+			<op>weight</op>
+			<target>autoAveragePowerCellsInner</target>
+			<low>0</low>
+			<high>20</high>
+			<multiplier>40</multiplier>
+			<target>autoAveragePowerCellsOuter</target>
+			<low>0</low>
+			<high>30</high>
+			<multiplier>30</multiplier>
+			<target>autoAveragePowerCellsLower</target>
+			<low>0</low>
+			<high>30</high>
+			<multiplier>20</multiplier>
+			<target>crossSuccess</target>
+			<low>0</low>
+			<high>100</high>
+			<multiplier>10</multiplier>
+		</field>
+		<field>
+			<name>cellAAR</name>
+			<type>number</type>
+			<label>Cells AAR</label>
+			<perspective>match</perspective>
+			<op>weight</op>
+			<target>telePowerCellsInner</target>
+			<low>0</low>
+			<high>30</high>
+			<multiplier>45</multiplier>
+			<target>telePowerCellsOuter</target>
+			<low>0</low>
+			<high>50</high>
+			<multiplier>30</multiplier>
+			<target>telePowerCellsLower</target>
+			<low>0</low>
+			<high>50</high>
+			<multiplier>15</multiplier>
+			<target>cellPickupHuman</target>
+			<low>0</low>
+			<high>50</high>
+			<multiplier>5</multiplier>
+			<target>cellPickupGround</target>
+			<low>0</low>
+			<high>50</high>
+			<multiplier>5</multiplier>
+		</field>
+		<field>
+			<name>cellAAR</name>
+			<type>number</type>
+			<label>Cells AAR</label>
+			<perspective>competition</perspective>
+			<op>average</op>
+			<target>cellAAR</target>
+		</field>
+		<field>
+			<name>controlAAR</name>
+			<type>number</type>
+			<label>Control AAR</label>
+			<perspective>competition</perspective>
+			<op>weight</op>
+			<target>rotationAttemps</target>
+			<low>0</low>
+			<high>40</high>
+			<multiplier>5</multiplier>
+			<target>percentRotationControl</target>
+			<low>0</low>
+			<high>100</high>
+			<multiplier>45</multiplier>
+			<target>colorAttemps</target>
+			<low>0</low>
+			<high>40</high>
+			<multiplier>5</multiplier>
+			<target>percentColorControl</target>
+			<low>0</low>
+			<high>100</high>
+			<multiplier>35</multiplier>
+			<target>averageRotationControlTime</target>
+			<low>30</low>
+			<high>5</high>
+			<multiplier>5</multiplier>
+			<target>averageColorControlTime</target>
+			<low>10</low>
+			<high>5</high>
+			<multiplier>5</multiplier>
+		</field>
+		<field>
+			<name>hangAAR</name>
+			<type>number</type>
+			<label>Hang AAR</label>
+			<perspective>competition</perspective>
+			<op>weight</op>
+			<target>totalHangAttempts</target>
+			<low>0</low>
+			<high>15</high>
+			<multiplier>5</multiplier>
+			<target>hangSuccess</target>
+			<low>0</low>
+			<high>100</high>
+			<multiplier>45</multiplier>
+			<target>buddyHangSuccess</target>
+			<low>0</low>
+			<high>100</high>
+			<multiplier>25</multiplier>
+			<target>balanceSuccess</target>
+			<low>0</low>
+			<high>100</high>
+			<multiplier>20</multiplier>
+			<target>hangTime</target>
+			<low>0</low>
+			<high>100</high>
+			<multiplier>10</multiplier>
+		</field>
+		<field>
+			<name>masterAAR</name>
+			<type>number</type>
+			<label>AAR</label>
+			<perspective>competition</perspective>
+			<op>weight</op>
+			<target>hangAAR</target>
+			<low>0</low>
+			<high>100</high>
+			<multiplier>30</multiplier>
+			<target>cellAAR</target>
+			<low>0</low>
+			<high>100</high>
+			<multiplier>45</multiplier>
+			<target>autoAAR</target>
+			<low>0</low>
+			<high>100</high>
+			<multiplier>15</multiplier>
+			<target>controlAAR</target>
+			<low>0</low>
+			<high>100</high>
+			<multiplier>10</multiplier>
+		</field>
+    </metaData>
+</app>
